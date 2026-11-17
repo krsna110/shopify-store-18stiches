@@ -1,0 +1,4 @@
+{"sections":{
+ "main":{"type":"main-product","blocks":{"a1":{"type":"accordion","settings":{"title":"Size guide","content":"<p>S: bust 34 in, waist 28 in. M: bust 36 in, waist 30 in. L: bust 38 in, waist 32 in. XL: bust 40 in, waist 34 in. These are body measurements, not garment measurements.</p>"}},"a2":{"type":"accordion","settings":{"title":"Fabric and care","content":"<p>Add fabric details here. Wash separately in cold water and dry in shade.</p>"}},"a3":{"type":"accordion","settings":{"title":"Shipping and returns","content":"<p>Dispatched in 1 to 2 working days. Delivery in 3 to 7 days across India. Returns and exchanges within 7 days of delivery.</p>"}}},"block_order":["a1","a2","a3"],"settings":{}},
+ "recs":{"type":"product-recommendations","settings":{}}
+},"order":["main","recs"]}

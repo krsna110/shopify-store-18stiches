@@ -1,0 +1,18 @@
+<section class="wrap block">
+  <div class="block__head"><h2>{{ section.settings.heading }}</h2></div>
+  <div class="mosaic">
+    {%- for block in section.blocks -%}
+      {%- assign n = forloop.index | modulo: 6 | plus: 1 -%}
+      <a class="mosaic__item mosaic__item--{{ forloop.index }}" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image -%}{{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 900px) 33vw, 100vw' }}{%- else -%}{{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag: 'placeholder' }}{%- endif -%}
+        <span class="mosaic__label">{{ block.settings.title }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{"name":"Collection mosaic","max_blocks":4,
+ "settings":[{"type":"text","id":"heading","label":"Heading","default":"The style edit"}],
+ "blocks":[{"type":"tile","name":"Tile","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"title","label":"Title","default":"Collection"},{"type":"url","id":"link","label":"Link"}]}],
+ "presets":[{"name":"Collection mosaic","blocks":[{"type":"tile"},{"type":"tile"},{"type":"tile"},{"type":"tile"}]}]}
+{% endschema %}

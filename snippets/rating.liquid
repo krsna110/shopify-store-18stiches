@@ -1,0 +1,2 @@
+{%- assign rv = product.metafields.reviews.rating.value.rating -%}
+{%- if rv != blank -%}<span class="chip"><b>★</b> {{ rv | round: 1 }}{% if product.metafields.reviews.rating_count != blank %} <i>| {{ product.metafields.reviews.rating_count }}</i>{% endif %}</span>{%- endif -%}

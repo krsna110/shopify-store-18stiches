@@ -1,0 +1,10 @@
+{%- assign v = product.selected_or_first_available_variant -%}
+<div class="price" data-price>
+  {%- if v.compare_at_price > v.price -%}
+    <s class="price__was">{{ v.compare_at_price | money }}</s>
+    <span class="price__now price__now--sale">{{ v.price | money }}</span>
+    <span class="price__off">{{ v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price }}% off</span>
+  {%- else -%}
+    <span class="price__now">{{ v.price | money }}</span>
+  {%- endif -%}
+</div>

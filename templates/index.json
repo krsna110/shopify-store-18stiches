@@ -1,0 +1,326 @@
+{
+ "sections": {
+  "slider": {
+   "type": "hero-slider",
+   "blocks": {
+    "s1": {
+     "type": "slide",
+     "settings": {
+      "heading": "The festive edit",
+      "text": "Kurta sets, dresses and more for every celebration.",
+      "button_label": "Shop now",
+      "link": "/collections/all"
+     }
+    },
+    "s2": {
+     "type": "slide",
+     "settings": {
+      "heading": "New season, new colors",
+      "text": "Fresh arrivals every week.",
+      "button_label": "Explore",
+      "link": "/collections/all"
+     }
+    }
+   },
+   "block_order": [
+    "s1",
+    "s2"
+   ],
+   "settings": {}
+  },
+  "marq": {
+   "type": "marquee",
+   "blocks": {
+    "a": {
+     "type": "item",
+     "settings": {
+      "text": "Free shipping"
+     }
+    },
+    "b": {
+     "type": "item",
+     "settings": {
+      "text": "Easy 7-day returns"
+     }
+    },
+    "c": {
+     "type": "item",
+     "settings": {
+      "text": "Secure payments"
+     }
+    },
+    "d": {
+     "type": "item",
+     "settings": {
+      "text": "Quality checked"
+     }
+    }
+   },
+   "block_order": [
+    "a",
+    "b",
+    "c",
+    "d"
+   ],
+   "settings": {}
+  },
+  "cats": {
+   "type": "tiles",
+   "blocks": {
+    "t1": {
+     "type": "tile",
+     "settings": {
+      "title": "Kurta sets",
+      "link": "/collections/all"
+     }
+    },
+    "t2": {
+     "type": "tile",
+     "settings": {
+      "title": "Kurtis and tops",
+      "link": "/collections/all"
+     }
+    },
+    "t3": {
+     "type": "tile",
+     "settings": {
+      "title": "Dresses",
+      "link": "/collections/all"
+     }
+    },
+    "t4": {
+     "type": "tile",
+     "settings": {
+      "title": "Co-ords",
+      "link": "/collections/all"
+     }
+    },
+    "t5": {
+     "type": "tile",
+     "settings": {
+      "title": "Sarees",
+      "link": "/collections/all"
+     }
+    },
+    "t6": {
+     "type": "tile",
+     "settings": {
+      "title": "Dupattas",
+      "link": "/collections/all"
+     }
+    }
+   },
+   "block_order": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6"
+   ],
+   "settings": {
+    "heading": "Top categories",
+    "shape": "rect"
+   }
+  },
+  "best": {
+   "type": "featured-collection",
+   "settings": {
+    "heading": "Bestsellers",
+    "layout": "slider"
+   }
+  },
+  "banners": {
+   "type": "promo-banners",
+   "blocks": {
+    "b1": {
+     "type": "banner",
+     "settings": {
+      "title": "Kurta sets",
+      "text": "Straight, anarkali and flared",
+      "link": "/collections/all"
+     }
+    },
+    "b2": {
+     "type": "banner",
+     "settings": {
+      "title": "Dresses and co-ords",
+      "text": "Easy looks for every day",
+      "link": "/collections/all"
+     }
+    }
+   },
+   "block_order": [
+    "b1",
+    "b2"
+   ],
+   "settings": {}
+  },
+  "occ": {
+   "type": "tiles",
+   "blocks": {
+    "t1": {
+     "type": "tile",
+     "settings": {
+      "title": "Haldi",
+      "link": "/collections/all"
+     }
+    },
+    "t2": {
+     "type": "tile",
+     "settings": {
+      "title": "Mehendi",
+      "link": "/collections/all"
+     }
+    },
+    "t3": {
+     "type": "tile",
+     "settings": {
+      "title": "Sangeet",
+      "link": "/collections/all"
+     }
+    },
+    "t4": {
+     "type": "tile",
+     "settings": {
+      "title": "Wedding",
+      "link": "/collections/all"
+     }
+    },
+    "t5": {
+     "type": "tile",
+     "settings": {
+      "title": "Reception",
+      "link": "/collections/all"
+     }
+    },
+    "t6": {
+     "type": "tile",
+     "settings": {
+      "title": "Festive",
+      "link": "/collections/all"
+     }
+    }
+   },
+   "block_order": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6"
+   ],
+   "settings": {
+    "heading": "Shop by occasion",
+    "shape": "arch"
+   }
+  },
+  "new": {
+   "type": "featured-collection",
+   "settings": {
+    "heading": "New arrivals",
+    "layout": "grid"
+   }
+  },
+  "mosaic": {
+   "type": "mosaic",
+   "blocks": {
+    "m1": {
+     "type": "tile",
+     "settings": {
+      "title": "Festive edit",
+      "link": "/collections/all"
+     }
+    },
+    "m2": {
+     "type": "tile",
+     "settings": {
+      "title": "Bestsellers",
+      "link": "/collections/all"
+     }
+    },
+    "m3": {
+     "type": "tile",
+     "settings": {
+      "title": "Everyday essentials",
+      "link": "/collections/all"
+     }
+    },
+    "m4": {
+     "type": "tile",
+     "settings": {
+      "title": "Wedding wear",
+      "link": "/collections/all"
+     }
+    }
+   },
+   "block_order": [
+    "m1",
+    "m2",
+    "m3",
+    "m4"
+   ],
+   "settings": {}
+  },
+  "reviews": {
+   "type": "testimonials",
+   "blocks": {
+    "r1": {
+     "type": "quote",
+     "settings": {
+      "quote": "The kurta set fits perfectly and the fabric feels light.",
+      "name": "Priya S.",
+      "place": "Bhopal"
+     }
+    },
+    "r2": {
+     "type": "quote",
+     "settings": {
+      "quote": "Ordered for Diwali and it reached in 3 days. Colors match the photos.",
+      "name": "Neha R.",
+      "place": "Indore"
+     }
+    },
+    "r3": {
+     "type": "quote",
+     "settings": {
+      "quote": "The size guide was accurate and the exchange was simple.",
+      "name": "Ayesha K.",
+      "place": "Mumbai"
+     }
+    },
+    "r4": {
+     "type": "quote",
+     "settings": {
+      "quote": "Beautiful embroidery and very good stitching.",
+      "name": "Sana M.",
+      "place": "Delhi"
+     }
+    }
+   },
+   "block_order": [
+    "r1",
+    "r2",
+    "r3",
+    "r4"
+   ],
+   "settings": {}
+  },
+  "seo": {
+   "type": "seo-text",
+   "settings": {}
+  }
+ },
+ "order": [
+  "slider",
+  "marq",
+  "cats",
+  "best",
+  "banners",
+  "occ",
+  "new",
+  "mosaic",
+  "reviews",
+  "seo"
+ ]
+}

@@ -1,0 +1,74 @@
+{%- paginate collection.products by section.settings.per_page -%}
+{%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+<section class="wrap block">
+  <div class="page-head"><h1>{{ collection.title }}</h1>{%- if collection.description != blank -%}<div class="rte">{{ collection.description }}</div>{%- endif -%}</div>
+  <div class="plp">
+    <div class="filters-veil" data-filter-close></div>
+    <aside class="filters" data-filters aria-label="Filters">
+      <div class="filters__head"><h2>Filters</h2><button class="icon-btn" type="button" data-filter-close aria-label="Close filters">✕</button></div>
+      <form id="FilterForm" data-filter-form method="get">
+        {%- for filter in collection.filters -%}
+          {%- assign fl = filter.label | downcase -%}
+          {%- assign is_color = false -%}
+          {%- if fl contains 'color' or fl contains 'colour' -%}{%- assign is_color = true -%}{%- endif -%}
+          <details class="fgroup" open>
+            <summary>{{ filter.label }}</summary>
+            <div class="fgroup__body">
+              {%- case filter.type -%}
+                {%- when 'price_range' -%}
+                  <div class="prange">
+                    <label class="sr" for="min-{{ section.id }}">Minimum price</label>
+                    <input id="min-{{ section.id }}" type="number" name="{{ filter.min_value.param_name }}" {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %} placeholder="₹ Min" min="0">
+                    <span>to</span>
+                    <label class="sr" for="max-{{ section.id }}">Maximum price</label>
+                    <input id="max-{{ section.id }}" type="number" name="{{ filter.max_value.param_name }}" {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %} placeholder="₹ Max" min="0">
+                  </div>
+                {%- else -%}
+                  {%- for value in filter.values -%}
+                    <label class="check{% if is_color %} check--color{% endif %}">
+                      <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                      {%- if is_color -%}<i class="sw" style="background:{{ value.swatch.color | default: value.label | handleize | remove: '-' }}"></i>{%- endif -%}
+                      <span>{{ value.label }}</span> <span class="muted">({{ value.count }})</span>
+                    </label>
+                  {%- endfor -%}
+              {%- endcase -%}
+            </div>
+          </details>
+        {%- endfor -%}
+        <a class="link" href="{{ collection.url }}?sort_by={{ sort_by }}">Clear all filters</a>
+      </form>
+      <button class="btn btn--block filters__apply" type="submit" form="FilterForm">Show results</button>
+    </aside>
+
+    <div class="plp__main">
+      <div class="toolbar">
+        <button class="btn btn--ghost filters__open" type="button" data-filter-open>Filters</button>
+        <span class="muted">{{ collection.products_count }} products</span>
+        <div class="toolbar__right">
+          <label class="sr" for="SortBy">Sort by</label>
+          <select id="SortBy" name="sort_by" form="FilterForm">
+            {%- for option in collection.sort_options -%}<option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>{%- endfor -%}
+          </select>
+          <div class="cols" role="group" aria-label="Grid size">
+            <button type="button" data-cols="2" aria-label="2 columns">2</button><button type="button" data-cols="3" aria-label="3 columns">3</button><button type="button" data-cols="4" aria-label="4 columns">4</button>
+          </div>
+        </div>
+      </div>
+      {%- assign has_active = false -%}
+      {%- capture chips -%}
+        {%- for filter in collection.filters -%}{%- if filter.type != 'price_range' -%}{%- for value in filter.active_values -%}{%- assign has_active = true -%}<a class="chipx" href="{{ value.url_to_remove }}">{{ value.label }} ✕</a>{%- endfor -%}{%- endif -%}{%- endfor -%}
+      {%- endcapture -%}
+      {%- if has_active -%}<div class="chipx-row">{{ chips }}</div>{%- endif -%}
+      {%- if collection.products.size == 0 -%}
+        <p class="empty">No products match these filters. <a class="link" href="{{ collection.url }}">Clear filters</a></p>
+      {%- else -%}
+        <div class="grid" data-plp-grid>{%- for product in collection.products -%}{% render 'product-card', product: product %}{%- endfor -%}</div>
+      {%- endif -%}
+      {% render 'pagination', paginate: paginate %}
+    </div>
+  </div>
+</section>
+{%- endpaginate -%}
+{% schema %}
+{"name":"Collection page","settings":[{"type":"range","id":"per_page","label":"Products per page","min":8,"max":36,"step":4,"default":24}]}
+{% endschema %}

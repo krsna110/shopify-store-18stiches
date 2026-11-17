@@ -1,0 +1,44 @@
+<footer class="footer">
+  <div class="wrap footer__grid">
+    {%- for block in section.blocks -%}
+      <div class="footer__col" {{ block.shopify_attributes }}>
+        {%- case block.type -%}
+          {%- when 'about' -%}
+            <h2 class="footer__title">{{ block.settings.title | default: shop.name }}</h2>
+            <p>{{ block.settings.text }}</p>
+            <div class="social">
+              {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" rel="noopener">Instagram</a>{%- endif -%}
+              {%- if settings.social_facebook != blank -%}<a href="{{ settings.social_facebook }}" rel="noopener">Facebook</a>{%- endif -%}
+              {%- if settings.social_youtube != blank -%}<a href="{{ settings.social_youtube }}" rel="noopener">YouTube</a>{%- endif -%}
+            </div>
+          {%- when 'menu' -%}
+            <h2 class="footer__title">{{ block.settings.title }}</h2>
+            <ul>{%- for link in linklists[block.settings.menu].links -%}<li><a href="{{ link.url }}">{{ link.title }}</a></li>{%- endfor -%}</ul>
+          {%- when 'newsletter' -%}
+            <h2 class="footer__title">{{ block.settings.title }}</h2>
+            <p>{{ block.settings.text }}</p>
+            {%- form 'customer', class: 'news' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <label class="sr" for="NewsEmail">Email address</label>
+              <input id="NewsEmail" type="email" name="contact[email]" required placeholder="Email address" autocomplete="email">
+              <button class="btn" type="submit">Subscribe</button>
+              {%- if form.posted_successfully? -%}<p class="note">Thanks, you are subscribed.</p>{%- endif -%}
+              {%- if form.errors -%}<div class="note note--err">{{ form.errors | default_errors }}</div>{%- endif -%}
+            {%- endform -%}
+        {%- endcase -%}
+      </div>
+    {%- endfor -%}
+  </div>
+  <div class="wrap footer__base">
+    <div class="footer__pay">{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag: class: 'pay' }}{%- endfor -%}</div>
+    <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+  </div>
+</footer>
+{% schema %}
+{"name":"Footer","max_blocks":5,"settings":[],
+ "blocks":[
+  {"type":"about","name":"About","limit":1,"settings":[{"type":"text","id":"title","label":"Heading"},{"type":"textarea","id":"text","label":"Text","default":"Ethnic and western wear for women, designed for everyday and festive days."}]},
+  {"type":"menu","name":"Menu","settings":[{"type":"text","id":"title","label":"Heading","default":"Shop"},{"type":"link_list","id":"menu","label":"Menu","default":"footer"}]},
+  {"type":"newsletter","name":"Newsletter","limit":1,"settings":[{"type":"text","id":"title","label":"Heading","default":"Get new-arrival updates"},{"type":"text","id":"text","label":"Text","default":"First look at launches and sale days."}]}
+ ]}
+{% endschema %}

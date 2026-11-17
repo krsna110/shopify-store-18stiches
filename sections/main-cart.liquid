@@ -1,0 +1,36 @@
+<section class="wrap block cartpage">
+  <div class="page-head"><h1>Your bag</h1></div>
+  {%- if cart.item_count == 0 -%}
+    <p class="empty">Your bag is empty. <a class="link" href="{{ routes.all_products_collection_url }}">Continue shopping</a></p>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cartform">
+      {% render 'shipping-progress' %}
+      <ul class="drawer__items">
+        {%- for item in cart.items -%}
+          <li class="line">
+            <a class="line__img" href="{{ item.url }}">{% if item.image %}{{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', width: 100 }}{% endif %}</a>
+            <div class="line__info">
+              <a href="{{ item.url }}" class="line__title">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}<p class="muted">{{ item.variant.title }}</p>{%- endunless -%}
+              <p class="muted">{{ item.final_price | money }}</p>
+              <label class="sr" for="q{{ item.index }}">Quantity</label>
+              <input id="q{{ item.index }}" class="buy__qty" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+            </div>
+            <div class="line__price">{{ item.final_line_price | money }}<a class="link" href="{{ item.url_to_remove }}">Remove</a></div>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="cartfoot">
+        <label for="CartNote">Order note</label>
+        <textarea id="CartNote" name="note" rows="3">{{ cart.note }}</textarea>
+        <p class="row"><span>Subtotal</span><strong>{{ cart.total_price | money }}</strong></p>
+        <p class="muted">Taxes and shipping are calculated at checkout.</p>
+        <button class="btn btn--ghost btn--block" type="submit" name="update">Update bag</button>
+        <button class="btn btn--block" type="submit" name="checkout">Checkout</button>
+      </div>
+    </form>
+  {%- endif -%}
+</section>
+{% schema %}
+{"name":"Cart page","settings":[]}
+{% endschema %}

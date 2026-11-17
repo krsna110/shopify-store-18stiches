@@ -1,0 +1,42 @@
+<div class="drawer" id="CartDrawer" aria-hidden="true">
+  <div class="drawer__veil" data-cart-close></div>
+  <aside class="drawer__panel" role="dialog" aria-modal="true" aria-label="Shopping bag">
+    <div id="CartDrawerInner" class="drawer__inner">
+      <div class="drawer__head">
+        <h2>Your bag ({{ cart.item_count }})</h2>
+        <button class="icon-btn drawer__close" type="button" data-cart-close aria-label="Close bag"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 5 14 14M19 5 5 19"/></svg></button>
+      </div>
+      {%- if cart.item_count == 0 -%}
+        <div class="drawer__empty"><p>Your bag is empty.</p><a class="btn" href="{{ routes.all_products_collection_url }}">Start shopping</a></div>
+      {%- else -%}
+        {% render 'shipping-progress' %}
+        <ul class="drawer__items">
+          {%- for item in cart.items -%}
+            <li class="line">
+              <a class="line__img" href="{{ item.url }}">{% if item.image %}{{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', width: 80 }}{% endif %}</a>
+              <div class="line__info">
+                <a href="{{ item.url }}" class="line__title">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}<p class="muted">{{ item.variant.title }}</p>{%- endunless -%}
+                <div class="qty">
+                  <button type="button" data-qty data-line="{{ forloop.index }}" data-value="{{ item.quantity | minus: 1 }}" aria-label="Decrease quantity">−</button>
+                  <span>{{ item.quantity }}</span>
+                  <button type="button" data-qty data-line="{{ forloop.index }}" data-value="{{ item.quantity | plus: 1 }}" aria-label="Increase quantity">+</button>
+                </div>
+              </div>
+              <div class="line__price">{{ item.final_line_price | money }}<button type="button" class="link" data-qty data-line="{{ forloop.index }}" data-value="0">Remove</button></div>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="drawer__foot">
+          <p class="row"><span>Subtotal</span><strong>{{ cart.total_price | money }}</strong></p>
+          <p class="muted">Taxes and shipping are calculated at checkout.</p>
+          <form action="{{ routes.cart_url }}" method="post"><button class="btn btn--block" type="submit" name="checkout">Checkout</button></form>
+          <a class="link" href="{{ routes.cart_url }}">View full bag</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </aside>
+</div>
+{% schema %}
+{"name":"Cart drawer","settings":[]}
+{% endschema %}

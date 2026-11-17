@@ -1,0 +1,20 @@
+{%- paginate search.results by 16 -%}
+<section class="wrap block">
+  <div class="page-head"><h1>Search</h1></div>
+  <form class="searchbar" action="{{ routes.search_url }}" method="get" role="search">
+    <label class="sr" for="Q">Search the store</label>
+    <input id="Q" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search kurtas, dresses, sarees">
+    <input type="hidden" name="type" value="product">
+    <button class="btn" type="submit">Search</button>
+  </form>
+  {%- if search.performed -%}
+    <p class="muted">{{ search.results_count }} results for “{{ search.terms }}”</p>
+    <div class="grid">{%- for item in search.results -%}{%- if item.object_type == 'product' -%}{% render 'product-card', product: item %}{%- endif -%}{%- endfor -%}</div>
+    {%- if search.results_count == 0 -%}<p class="empty">Nothing found. Try a different word.</p>{%- endif -%}
+    {% render 'pagination', paginate: paginate %}
+  {%- endif -%}
+</section>
+{%- endpaginate -%}
+{% schema %}
+{"name":"Search page","settings":[]}
+{% endschema %}

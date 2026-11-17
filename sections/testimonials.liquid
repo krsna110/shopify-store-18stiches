@@ -1,0 +1,18 @@
+<section class="wrap block">
+  <div class="block__head"><h2>{{ section.settings.heading }}</h2>{%- if section.settings.summary != blank -%}<span class="stars">★ <span class="muted">{{ section.settings.summary }}</span></span>{%- endif -%}</div>
+  <div class="quotes">
+    {%- for block in section.blocks -%}
+      <figure class="quote" {{ block.shopify_attributes }}>
+        {%- if block.settings.photo -%}{{ block.settings.photo | image_url: width: 500 | image_tag: loading: 'lazy', class: 'quote__photo', widths: '250, 400, 500' }}{%- endif -%}
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>{{ block.settings.quote }}</blockquote>
+        <figcaption>{{ block.settings.name }}{% if block.settings.place != blank %}, {{ block.settings.place }}{% endif %}</figcaption>
+      </figure>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{"name":"Customer reviews","max_blocks":6,"settings":[{"type":"text","id":"heading","label":"Heading","default":"What customers say"},{"type":"text","id":"summary","label":"Summary line","info":"Example: 4.8 from 250 reviews. Leave empty to hide."}],
+ "blocks":[{"type":"quote","name":"Review","settings":[{"type":"image_picker","id":"photo","label":"Customer photo (optional)"},{"type":"textarea","id":"quote","label":"Review"},{"type":"text","id":"name","label":"Name"},{"type":"text","id":"place","label":"City"}]}],
+ "presets":[{"name":"Customer reviews","blocks":[{"type":"quote"},{"type":"quote"},{"type":"quote"}]}]}
+{% endschema %}

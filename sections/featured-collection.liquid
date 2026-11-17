@@ -1,0 +1,20 @@
+<section class="wrap block">
+  <div class="block__head"><h2>{{ section.settings.heading }}</h2>
+    {%- if section.settings.collection != blank -%}<a class="link" href="{{ section.settings.collection.url }}">View all</a>{%- endif -%}
+  </div>
+  <div class="grid{% if section.settings.layout == 'slider' %} grid--slider{% endif %}">
+    {%- if section.settings.collection != blank -%}
+      {%- for product in section.settings.collection.products limit: section.settings.count -%}{% render 'product-card', product: product %}{%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..4) -%}<article class="card"><div class="card__top"><div class="card__media">{{ 'product-' | append: i | placeholder_svg_tag: 'card__img placeholder' }}</div></div><div class="card__body"><span class="card__title">Product name</span><div class="price"><span class="price__now">₹1,499</span></div></div></article>{%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{"name":"Featured collection","settings":[
+ {"type":"text","id":"heading","label":"Heading","default":"Bestsellers"},
+ {"type":"collection","id":"collection","label":"Collection"},
+ {"type":"select","id":"layout","label":"Layout","options":[{"value":"grid","label":"Grid"},{"value":"slider","label":"Scrolling row"}],"default":"grid"},
+ {"type":"range","id":"count","label":"Products to show","min":4,"max":12,"step":2,"default":8}
+],"presets":[{"name":"Featured collection"}]}
+{% endschema %}

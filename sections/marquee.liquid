@@ -1,0 +1,12 @@
+<section class="marquee" aria-label="Highlights">
+  <div class="marquee__track">
+    {%- for i in (1..2) -%}
+      <ul{% if i == 2 %} aria-hidden="true"{% endif %}>{%- for block in section.blocks -%}<li {% if i == 1 %}{{ block.shopify_attributes }}{% endif %}>{{ block.settings.text }}</li>{%- endfor -%}</ul>
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{"name":"Scrolling highlights","max_blocks":8,"settings":[],
+ "blocks":[{"type":"item","name":"Highlight","settings":[{"type":"text","id":"text","label":"Text","default":"Free shipping"}]}],
+ "presets":[{"name":"Scrolling highlights","blocks":[{"type":"item"},{"type":"item"},{"type":"item"}]}]}
+{% endschema %}

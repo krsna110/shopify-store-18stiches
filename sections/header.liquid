@@ -1,0 +1,66 @@
+<header class="header" data-header>
+  <div class="wrap header__row">
+    <button class="icon-btn header__burger" type="button" data-menu-toggle aria-label="Open menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <a class="header__logo" href="{{ routes.root_url }}">
+      {%- if section.settings.logo -%}{{ section.settings.logo | image_url: width: 400 | image_tag: height: 44, width: 160, loading: 'eager', alt: shop.name }}{%- else -%}{{ shop.name }}{%- endif -%}
+    </a>
+    <nav class="nav" data-nav aria-label="Main">
+      <ul>
+        {%- for link in linklists[section.settings.menu].links -%}
+          <li{% if link.links.size > 0 %} class="has-sub"{% endif %}>
+            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+            {%- if link.links.size > 0 -%}
+              {%- assign has_grand = false -%}
+              {%- for c in link.links -%}{%- if c.links.size > 0 -%}{%- assign has_grand = true -%}{%- endif -%}{%- endfor -%}
+              <div class="mega"><div class="mega__in">
+                <div class="mega__cols">
+                  {%- if has_grand -%}
+                    {%- for c in link.links -%}
+                      <div><a class="mega__head" href="{{ c.url }}">{{ c.title }}</a>
+                        <ul>{%- for g in c.links -%}<li><a href="{{ g.url }}">{{ g.title }}</a></li>{%- endfor -%}</ul>
+                      </div>
+                    {%- endfor -%}
+                  {%- else -%}
+                    <div><a class="mega__head" href="{{ link.url }}">Shop all</a>
+                      <ul>{%- for c in link.links -%}<li><a href="{{ c.url }}">{{ c.title }}</a></li>{%- endfor -%}</ul>
+                    </div>
+                  {%- endif -%}
+                </div>
+                {%- for block in section.blocks -%}
+                  {%- if block.settings.menu_title == link.title -%}
+                    <a class="mega__promo" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+                      {%- if block.settings.image -%}{{ block.settings.image | image_url: width: 520 | image_tag: loading: 'lazy', width: 260 }}{%- else -%}{{ 'collection-1' | placeholder_svg_tag: 'placeholder' }}{%- endif -%}
+                      <span>{{ block.settings.label }}</span>
+                    </a>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div></div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+    <div class="header__icons">
+      <a class="icon-btn" href="{{ routes.search_url }}" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></a>
+      <a class="icon-btn" href="{{ settings.wishlist_url }}" aria-label="Wishlist"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></a>
+      <a class="icon-btn" href="{{ routes.account_url }}" aria-label="Account"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></a>
+      <a class="icon-btn cart-link" href="{{ routes.cart_url }}" data-cart-open aria-label="Bag">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+        <span class="count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+{% schema %}
+{"name":"Header","settings":[
+ {"type":"image_picker","id":"logo","label":"Logo"},
+ {"type":"link_list","id":"menu","label":"Menu","default":"main-menu"}
+],
+"blocks":[{"type":"promo","name":"Mega menu photo","settings":[
+ {"type":"text","id":"menu_title","label":"Top-level menu item","info":"Type the menu item name exactly as in your menu, e.g. Kurta Sets."},
+ {"type":"image_picker","id":"image","label":"Photo"},
+ {"type":"text","id":"label","label":"Caption","default":"New arrivals"},
+ {"type":"url","id":"link","label":"Link"}]}]}
+{% endschema %}
