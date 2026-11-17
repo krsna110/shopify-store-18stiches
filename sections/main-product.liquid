@@ -21,8 +21,14 @@
       {%- unless product.has_only_default_variant -%}
         {%- for option in product.options_with_values -%}
           {%- assign oi = forloop.index0 -%}
+          {%- assign opt_down = option.name | downcase -%}
           <fieldset class="opt" data-option-index="{{ oi }}">
-            <legend>{{ option.name }}</legend>
+            <div class="opt__legend-row">
+              <legend>{{ option.name }}</legend>
+              {%- if opt_down contains 'size' -%}
+                <a class="opt__guide-link link" href="/pages/size-guide" target="_blank">Size Guide &rarr;</a>
+              {%- endif -%}
+            </div>
             <div class="opt__vals">
               {%- for value in option.values -%}
                 <input type="radio" id="o{{ oi }}-{{ forloop.index }}" name="opt{{ oi }}" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %} data-option>
@@ -41,9 +47,12 @@
       {%- if section.settings.show_payment_button -%}{{ form | payment_button }}{%- endif -%}
     {%- endform -%}
 
-    {%- if section.settings.show_whatsapp and settings.whatsapp_number != blank -%}
-      {%- capture wa -%}Hi, I want to order {{ product.title }} {{ shop.url }}{{ product.url }}{%- endcapture -%}
-      <a class="btn btn--ghost btn--block" href="https://wa.me/{{ settings.whatsapp_number }}?text={{ wa | url_encode }}" rel="noopener">Ask or order on WhatsApp</a>
+    {%- if section.settings.show_whatsapp -%}
+      {%- capture wa -%}Hi, I would love styling & custom sizing advice for {{ product.title }} ({{ shop.url }}{{ product.url }}){%- endcapture -%}
+      {%- assign wa_num = settings.whatsapp_number | default: '919876543210' -%}
+      <a class="btn btn--ghost btn--block btn--wa" href="https://wa.me/{{ wa_num }}?text={{ wa | url_encode }}" target="_blank" rel="noopener">
+        <span>💬</span> Styling Concierge & Custom Sizing
+      </a>
     {%- endif -%}
 
     {%- if section.settings.perks != blank -%}<ul class="perks">{%- assign perk_list = section.settings.perks | newline_to_br | split: '<br />' -%}{%- for perk in perk_list -%}{%- if perk != blank -%}<li>{{ perk | strip_newlines | escape }}</li>{%- endif -%}{%- endfor -%}</ul>{%- endif -%}

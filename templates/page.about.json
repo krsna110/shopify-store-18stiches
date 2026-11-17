@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "story": {
+      "type": "brand-story",
+      "settings": {
+        "bg_color": "paper",
+        "eyebrow": "THE PHILOSOPHY OF 18 STITCHES",
+        "heading": "Where Ancient Loom Traditions Meet Contemporary Grace",
+        "quote": "Eighteen stitches in every inch—a master weaver's testament to patience, human hands, and conscious luxury.",
+        "text": "<p>18 Stitches was founded with an unyielding reverence for India's living textile heritage. In a world dominated by rapid consumption and synthetic fibers, our atelier champions the deliberate art of slow fashion.</p><p>We collaborate directly with generational weavers in Chanderi, Varanasi, and Maheshwar, bringing together age-old artisanal weaves with minimalist silhouettes tailored for the contemporary woman.</p><p>Every garment is produced in strictly limited editions of 15 to 30 pieces, ensuring mindful production without waste, and creating timeless heirlooms meant to be cherished across celebrations.</p>",
+        "signature": "The 18 Stitches Atelier",
+        "signature_sub": "Handcrafted in India • Designed for Eternity",
+        "button_label": "Discover The Current Drop",
+        "button_link": "/collections/all"
+      }
+    },
+    "pillars": {
+      "type": "craft-pillars",
+      "settings": {
+        "eyebrow": "OUR CORE PILLARS",
+        "heading": "The Values Woven Into Every Silhouette"
+      }
+    },
+    "care": {
+      "type": "care-guide",
+      "settings": {
+        "eyebrow": "SLOW FASHION PHILOSOPHY",
+        "heading": "Crafted to Last for Generations"
+      }
+    }
+  },
+  "order": [
+    "story",
+    "pillars",
+    "care"
+  ]
+}

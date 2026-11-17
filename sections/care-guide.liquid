@@ -1,0 +1,96 @@
+<section class="wrap block care-section" {{ section.shopify_attributes }}>
+  <div class="center care__head">
+    {%- if section.settings.eyebrow != blank -%}<p class="care__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.subheading != blank -%}<p class="muted narrow center">{{ section.settings.subheading }}</p>{%- endif -%}
+  </div>
+
+  <div class="care__grid">
+    {%- for block in section.blocks -%}
+      <div class="care-card" {{ block.shopify_attributes }}>
+        <div class="care-card__top">
+          <span class="care-card__icon">{{ block.settings.icon | default: '✦' }}</span>
+          <h3 class="care-card__title">{{ block.settings.title }}</h3>
+        </div>
+        <div class="care-card__body rte">
+          {{ block.settings.content }}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="care__banner">
+    <div class="care__banner-text">
+      <h4>The Golden Rule for Heirloom Textiles</h4>
+      <p>Always wrap your pure silks and zari garments in breathable, unbleached cotton muslin cloth. Avoid plastic bags and never spray perfume directly onto metallic zari or embroidery threads.</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fabric Care & Longevity",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "PRESERVING HEIRLOOM CRAFT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Textile & Garment Care Guide"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Handcrafted Indian textiles are alive with natural fibers. Treat them with mindfulness and they will last for generations."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "care_item",
+      "name": "Fabric Category",
+      "settings": [
+        {"type": "text", "id": "icon", "label": "Symbol", "default": "✦"},
+        {"type": "text", "id": "title", "label": "Fabric Name", "default": "Pure Silk & Chanderi"},
+        {"type": "richtext", "id": "content", "label": "Care Steps", "default": "<p><strong>Cleaning:</strong> Strictly professional dry clean only.<br><strong>Ironing:</strong> Low-heat steam iron on reverse side, or use a thin cotton pressing cloth.<br><strong>Storage:</strong> Store flat wrapped in muslin.</p>"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fabric Care & Longevity",
+      "blocks": [
+        {
+          "type": "care_item",
+          "settings": {
+            "icon": "✦",
+            "title": "Pure Silks & Banarasi Weaves",
+            "content": "<p><strong>Cleaning:</strong> Strictly professional dry clean only.<br><strong>Ironing:</strong> Steam gently on reverse side under low temperature.<br><strong>Storage:</strong> Wrap in clean unbleached muslin. Refold along different creases twice a year to preserve fold lines.</p>"
+          }
+        },
+        {
+          "type": "care_item",
+          "settings": {
+            "icon": "◈",
+            "title": "Handloom Chanderi & Organza",
+            "content": "<p><strong>Cleaning:</strong> Delicate dry cleaning recommended.<br><strong>Care:</strong> Avoid direct friction or rubbing metallic zari borders.<br><strong>Storage:</strong> Hang on padded hangers or fold carefully with acid-free tissue paper between layers.</p>"
+          }
+        },
+        {
+          "type": "care_item",
+          "settings": {
+            "icon": "❊",
+            "title": "Organic Cottons & Hand-Block Prints",
+            "content": "<p><strong>Washing:</strong> First wash dry clean; subsequent washes gentle hand wash in cold water using mild detergent.<br><strong>Drying:</strong> Dry in open shade inside-out. Do not wring or soak.<br><strong>Ironing:</strong> Warm iron while fabric is slightly damp.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

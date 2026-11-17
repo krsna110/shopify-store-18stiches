@@ -1,1 +1,21 @@
-{"name":"Header group","type":"header","sections":{"announcement":{"type":"announcement-bar","settings":{}},"header":{"type":"header","settings":{}}},"order":["announcement","header"]}
+{
+  "name": "Header group",
+  "type": "header",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "Complimentary Custom Tailoring on WhatsApp • Free Express Delivery across India on orders above ₹1,999",
+        "link": "/pages/size-guide"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement",
+    "header"
+  ]
+}

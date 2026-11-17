@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "care": {
+      "type": "care-guide",
+      "settings": {
+        "eyebrow": "CONSCIOUS LONGEVITY",
+        "heading": "Textile & Garment Care Guide",
+        "subheading": "Handwoven Indian textiles are alive with natural fibers. Treat them with mindfulness and they will last for generations."
+      }
+    },
+    "pillars": {
+      "type": "craft-pillars",
+      "settings": {
+        "eyebrow": "ETHICAL VALUES",
+        "heading": "The Soul Behind The Stitch"
+      }
+    }
+  },
+  "order": [
+    "care",
+    "pillars"
+  ]
+}

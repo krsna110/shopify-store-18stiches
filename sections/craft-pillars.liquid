@@ -1,0 +1,112 @@
+<section class="wrap block craft-pillars" {{ section.shopify_attributes }}>
+  <div class="center craft-pillars__head">
+    {%- if section.settings.eyebrow != blank -%}<p class="craft-pillars__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+  </div>
+
+  <div class="craft-pillars__grid">
+    {%- for block in section.blocks -%}
+      <div class="craft-card" {{ block.shopify_attributes }}>
+        <div class="craft-card__icon">
+          {%- if block.settings.custom_icon != blank -%}
+            {{ block.settings.custom_icon | image_url: width: 64 | image_tag: loading: 'lazy', alt: block.settings.title }}
+          {%- else -%}
+            <span class="craft-card__symbol">{{ block.settings.symbol | default: '✦' }}</span>
+          {%- endif -%}
+        </div>
+        <h3 class="craft-card__title">{{ block.settings.title }}</h3>
+        <p class="craft-card__text">{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Craft & Atelier Pillars",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE 18 STITCHES PROMISE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Honoring the Soul of Indian Craftsmanship"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Icon Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "symbol",
+          "label": "Decorative Symbol",
+          "default": "✦"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Pure Handloom & Silks"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Sourced directly from authentic weaver clusters across Chanderi, Varanasi, and Maheshwar."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Craft & Atelier Pillars",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "symbol": "✦",
+            "title": "Master Artisan Weaving",
+            "text": "Every yard of silk and chanderi is ethically sourced and woven on traditional pit looms."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "symbol": "◈",
+            "title": "Small Batch Capsules",
+            "text": "We produce in limited editions of 15 to 30 pieces to prevent mass-factory waste and preserve exclusivity."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "symbol": "❊",
+            "title": "Custom Tailored Fit",
+            "text": "Generous 2-3 inch inner margins in every garment, with complimentary custom tailoring on WhatsApp."
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "symbol": "✺",
+            "title": "Heirloom Finishing",
+            "text": "French seams, fabric-covered buttons, and hand-tacked hems designed to last through generations."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,1 +1,57 @@
-{"name":"Footer group","type":"footer","sections":{"footer":{"type":"footer","blocks":{"about":{"type":"about","settings":{}},"shop":{"type":"menu","settings":{"title":"Shop","menu":"main-menu"}},"help":{"type":"menu","settings":{"title":"Customer service","menu":"footer"}},"info":{"type":"menu","settings":{"title":"About us","menu":"footer"}},"news":{"type":"newsletter","settings":{}}},"block_order":["about","shop","help","info","news"],"settings":{}}},"order":["footer"]}
+{
+  "name": "Footer group",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "about": {
+          "type": "about",
+          "settings": {
+            "title": "18 Stitches",
+            "text": "Handcrafted Indian luxury silhouettes celebrating timeless handlooms, master needlecraft, and slow conscious fashion."
+          }
+        },
+        "shop": {
+          "type": "menu",
+          "settings": {
+            "title": "Collections",
+            "menu": "main-menu"
+          }
+        },
+        "help": {
+          "type": "menu",
+          "settings": {
+            "title": "Client Care",
+            "menu": "footer"
+          }
+        },
+        "info": {
+          "type": "menu",
+          "settings": {
+            "title": "The House",
+            "menu": "footer"
+          }
+        },
+        "news": {
+          "type": "newsletter",
+          "settings": {
+            "title": "The Atelier Journal",
+            "text": "Receive private invitations to new capsule drops, bespoke trunk shows, and styling notes."
+          }
+        }
+      },
+      "block_order": [
+        "about",
+        "shop",
+        "help",
+        "info",
+        "news"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

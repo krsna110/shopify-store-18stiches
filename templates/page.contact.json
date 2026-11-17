@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "concierge": {
+      "type": "contact-concierge",
+      "settings": {
+        "eyebrow": "ATELIER CLIENT CARE",
+        "heading": "Personal Styling & Bespoke Concierge",
+        "subheading": "Whether you require assistance with sizing, festive styling, custom made-to-measure orders, or boutique appointments, our stylist team is delighted to assist you.",
+        "email": "concierge@18stitches.com",
+        "address": "18 Stitches Design House, New Delhi / Jaipur, India"
+      }
+    },
+    "faq": {
+      "type": "faq-accordion",
+      "settings": {
+        "eyebrow": "QUICK ANSWERS",
+        "heading": "Client Inquiries",
+        "subheading": "Common questions regarding studio visits and bespoke requests."
+      }
+    }
+  },
+  "order": [
+    "concierge",
+    "faq"
+  ]
+}

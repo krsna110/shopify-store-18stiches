@@ -78,4 +78,12 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-wish]');if
  try{localStorage.setItem(WK,JSON.stringify(w))}catch(x){}wpaint()});
 wpaint();
 document.addEventListener('click',e=>{const t=e.target.closest('[data-seo-toggle]');if(!t)return;const s=t.closest('[data-seo]');const o=s.classList.toggle('is-open');t.textContent=o?'View less':'View more'});
+document.addEventListener('click',e=>{
+ const btn=e.target.closest('[data-unit]');if(!btn)return;
+ const wrap=btn.closest('[data-size-guide]');if(!wrap)return;
+ const u=btn.dataset.unit;
+ wrap.querySelectorAll('[data-unit]').forEach(b=>b.classList.toggle('is-active',b===btn));
+ const tbl=wrap.querySelector('.size-table');
+ if(tbl){tbl.querySelectorAll('td[data-in]').forEach(td=>{td.textContent=td.dataset[u]||td.dataset.in})}
+});
 })();

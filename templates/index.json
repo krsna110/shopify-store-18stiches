@@ -1,326 +1,251 @@
 {
- "sections": {
-  "slider": {
-   "type": "hero-slider",
-   "blocks": {
-    "s1": {
-     "type": "slide",
-     "settings": {
-      "heading": "The festive edit",
-      "text": "Kurta sets, dresses and more for every celebration.",
-      "button_label": "Shop now",
-      "link": "/collections/all"
-     }
+  "sections": {
+    "slider": {
+      "type": "hero-slider",
+      "blocks": {
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "heading": "The Festive Heritage Edit",
+            "text": "Intricate handspun Chanderis and pure silks adorned with antique zari.",
+            "button_label": "Discover The Edit",
+            "link": "/collections/all"
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "heading": "Slow Luxury, Master Stitched",
+            "text": "Limited capsule drops celebrating generational Indian handloom craftsmanship.",
+            "button_label": "Explore Capsules",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2"
+      ],
+      "settings": {}
     },
-    "s2": {
-     "type": "slide",
-     "settings": {
-      "heading": "New season, new colors",
-      "text": "Fresh arrivals every week.",
-      "button_label": "Explore",
-      "link": "/collections/all"
-     }
+    "marq": {
+      "type": "marquee",
+      "blocks": {
+        "a": {
+          "type": "item",
+          "settings": {
+            "text": "Master Artisan Handloom"
+          }
+        },
+        "b": {
+          "type": "item",
+          "settings": {
+            "text": "Complimentary Custom Tailoring on WhatsApp"
+          }
+        },
+        "c": {
+          "type": "item",
+          "settings": {
+            "text": "Express Delivery Across India & Worldwide"
+          }
+        },
+        "d": {
+          "type": "item",
+          "settings": {
+            "text": "Generous 3-Inch Inner Margins"
+          }
+        },
+        "e": {
+          "type": "item",
+          "settings": {
+            "text": "Heirloom Finishing & French Seams"
+          }
+        }
+      },
+      "block_order": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "settings": {}
+    },
+    "capsules": {
+      "type": "capsule-showcase",
+      "blocks": {
+        "c1": {
+          "type": "capsule",
+          "settings": {
+            "title": "The Festive Edit",
+            "subtitle": "Edition 01 • Pure Silks & Zari",
+            "badge": "Signature",
+            "description": "Opulent handloom Chanderi and pure raw silk kurta sets.",
+            "button_text": "Shop Capsule",
+            "link": "/collections/all"
+          }
+        },
+        "c2": {
+          "type": "capsule",
+          "settings": {
+            "title": "The Silk & Chanderi Drop",
+            "subtitle": "Edition 02 • Featherlight Drapes",
+            "badge": "Handwoven",
+            "description": "Bespoke silhouettes designed for intimate celebrations.",
+            "button_text": "Shop Capsule",
+            "link": "/collections/all"
+          }
+        },
+        "c3": {
+          "type": "capsule",
+          "settings": {
+            "title": "Everyday Luxe & Co-ords",
+            "subtitle": "Edition 03 • Contemporary Ease",
+            "badge": "Limited Run",
+            "description": "Mindfully tailored linen and organic cotton fusion sets.",
+            "button_text": "Shop Capsule",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "eyebrow": "LIMITED EDITIONS",
+        "heading": "Curated Capsule Drops",
+        "subheading": "Intentionally designed in limited runs of 20 to 30 pieces. Once archived, never repeated.",
+        "style": "arch"
+      }
+    },
+    "story": {
+      "type": "brand-story",
+      "settings": {
+        "bg_color": "mist",
+        "eyebrow": "THE PHILOSOPHY OF 18 STITCHES",
+        "heading": "Where Ancient Loom Traditions Meet Contemporary Grace",
+        "quote": "Eighteen stitches in every inch—a master artisan's mark of patience, precision, and conscious luxury.",
+        "text": "<p>18 Stitches was born from an intimate reverence for India's textile provenance. Rejecting mass-market churn, each capsule is handcrafted in small batches, bridging the timeless artistry of Chanderi and Banarasi master weavers with effortless modern drapes.</p>",
+        "signature": "The 18 Stitches Atelier",
+        "signature_sub": "Handcrafted in India • Designed for Generations",
+        "button_label": "Read Our Full Story",
+        "button_link": "/pages/about"
+      }
+    },
+    "best": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Curated Masterpieces",
+        "layout": "slider"
+      }
+    },
+    "pillars": {
+      "type": "craft-pillars",
+      "settings": {
+        "eyebrow": "THE 18 STITCHES PROMISE",
+        "heading": "Honoring the Soul of Indian Craftsmanship"
+      }
+    },
+    "mosaic": {
+      "type": "mosaic",
+      "blocks": {
+        "m1": {
+          "type": "tile",
+          "settings": {
+            "title": "The Festive Edit",
+            "link": "/collections/all"
+          }
+        },
+        "m2": {
+          "type": "tile",
+          "settings": {
+            "title": "Handcrafted Kurta Sets",
+            "link": "/collections/all"
+          }
+        },
+        "m3": {
+          "type": "tile",
+          "settings": {
+            "title": "Contemporary Co-ords",
+            "link": "/collections/all"
+          }
+        },
+        "m4": {
+          "type": "tile",
+          "settings": {
+            "title": "Bespoke Occasion Wear",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ],
+      "settings": {}
+    },
+    "reviews": {
+      "type": "testimonials",
+      "blocks": {
+        "r1": {
+          "type": "quote",
+          "settings": {
+            "quote": "The handwoven Chanderi feels like whisper-light silk. The attention to the inner finishing and margins is unmatched.",
+            "name": "Dr. Ananya R.",
+            "place": "New Delhi"
+          }
+        },
+        "r2": {
+          "type": "quote",
+          "settings": {
+            "quote": "Ordered for my sister's Sangeet ceremony. The gold zari work was so understated yet regal. Received endless compliments.",
+            "name": "Meera S.",
+            "place": "Mumbai"
+          }
+        },
+        "r3": {
+          "type": "quote",
+          "settings": {
+            "quote": "The WhatsApp styling team guided me on custom sleeve adjustments and it arrived tailored to perfection.",
+            "name": "Kavita M.",
+            "place": "Bengaluru"
+          }
+        },
+        "r4": {
+          "type": "quote",
+          "settings": {
+            "quote": "A truly premium Indian brand that respects slow craft. Beautiful packaging and heirloom quality.",
+            "name": "Radhika B.",
+            "place": "Jaipur"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4"
+      ],
+      "settings": {}
+    },
+    "seo": {
+      "type": "seo-text",
+      "settings": {}
     }
-   },
-   "block_order": [
-    "s1",
-    "s2"
-   ],
-   "settings": {}
   },
-  "marq": {
-   "type": "marquee",
-   "blocks": {
-    "a": {
-     "type": "item",
-     "settings": {
-      "text": "Free shipping"
-     }
-    },
-    "b": {
-     "type": "item",
-     "settings": {
-      "text": "Easy 7-day returns"
-     }
-    },
-    "c": {
-     "type": "item",
-     "settings": {
-      "text": "Secure payments"
-     }
-    },
-    "d": {
-     "type": "item",
-     "settings": {
-      "text": "Quality checked"
-     }
-    }
-   },
-   "block_order": [
-    "a",
-    "b",
-    "c",
-    "d"
-   ],
-   "settings": {}
-  },
-  "cats": {
-   "type": "tiles",
-   "blocks": {
-    "t1": {
-     "type": "tile",
-     "settings": {
-      "title": "Kurta sets",
-      "link": "/collections/all"
-     }
-    },
-    "t2": {
-     "type": "tile",
-     "settings": {
-      "title": "Kurtis and tops",
-      "link": "/collections/all"
-     }
-    },
-    "t3": {
-     "type": "tile",
-     "settings": {
-      "title": "Dresses",
-      "link": "/collections/all"
-     }
-    },
-    "t4": {
-     "type": "tile",
-     "settings": {
-      "title": "Co-ords",
-      "link": "/collections/all"
-     }
-    },
-    "t5": {
-     "type": "tile",
-     "settings": {
-      "title": "Sarees",
-      "link": "/collections/all"
-     }
-    },
-    "t6": {
-     "type": "tile",
-     "settings": {
-      "title": "Dupattas",
-      "link": "/collections/all"
-     }
-    }
-   },
-   "block_order": [
-    "t1",
-    "t2",
-    "t3",
-    "t4",
-    "t5",
-    "t6"
-   ],
-   "settings": {
-    "heading": "Top categories",
-    "shape": "rect"
-   }
-  },
-  "best": {
-   "type": "featured-collection",
-   "settings": {
-    "heading": "Bestsellers",
-    "layout": "slider"
-   }
-  },
-  "banners": {
-   "type": "promo-banners",
-   "blocks": {
-    "b1": {
-     "type": "banner",
-     "settings": {
-      "title": "Kurta sets",
-      "text": "Straight, anarkali and flared",
-      "link": "/collections/all"
-     }
-    },
-    "b2": {
-     "type": "banner",
-     "settings": {
-      "title": "Dresses and co-ords",
-      "text": "Easy looks for every day",
-      "link": "/collections/all"
-     }
-    }
-   },
-   "block_order": [
-    "b1",
-    "b2"
-   ],
-   "settings": {}
-  },
-  "occ": {
-   "type": "tiles",
-   "blocks": {
-    "t1": {
-     "type": "tile",
-     "settings": {
-      "title": "Haldi",
-      "link": "/collections/all"
-     }
-    },
-    "t2": {
-     "type": "tile",
-     "settings": {
-      "title": "Mehendi",
-      "link": "/collections/all"
-     }
-    },
-    "t3": {
-     "type": "tile",
-     "settings": {
-      "title": "Sangeet",
-      "link": "/collections/all"
-     }
-    },
-    "t4": {
-     "type": "tile",
-     "settings": {
-      "title": "Wedding",
-      "link": "/collections/all"
-     }
-    },
-    "t5": {
-     "type": "tile",
-     "settings": {
-      "title": "Reception",
-      "link": "/collections/all"
-     }
-    },
-    "t6": {
-     "type": "tile",
-     "settings": {
-      "title": "Festive",
-      "link": "/collections/all"
-     }
-    }
-   },
-   "block_order": [
-    "t1",
-    "t2",
-    "t3",
-    "t4",
-    "t5",
-    "t6"
-   ],
-   "settings": {
-    "heading": "Shop by occasion",
-    "shape": "arch"
-   }
-  },
-  "new": {
-   "type": "featured-collection",
-   "settings": {
-    "heading": "New arrivals",
-    "layout": "grid"
-   }
-  },
-  "mosaic": {
-   "type": "mosaic",
-   "blocks": {
-    "m1": {
-     "type": "tile",
-     "settings": {
-      "title": "Festive edit",
-      "link": "/collections/all"
-     }
-    },
-    "m2": {
-     "type": "tile",
-     "settings": {
-      "title": "Bestsellers",
-      "link": "/collections/all"
-     }
-    },
-    "m3": {
-     "type": "tile",
-     "settings": {
-      "title": "Everyday essentials",
-      "link": "/collections/all"
-     }
-    },
-    "m4": {
-     "type": "tile",
-     "settings": {
-      "title": "Wedding wear",
-      "link": "/collections/all"
-     }
-    }
-   },
-   "block_order": [
-    "m1",
-    "m2",
-    "m3",
-    "m4"
-   ],
-   "settings": {}
-  },
-  "reviews": {
-   "type": "testimonials",
-   "blocks": {
-    "r1": {
-     "type": "quote",
-     "settings": {
-      "quote": "The kurta set fits perfectly and the fabric feels light.",
-      "name": "Priya S.",
-      "place": "Bhopal"
-     }
-    },
-    "r2": {
-     "type": "quote",
-     "settings": {
-      "quote": "Ordered for Diwali and it reached in 3 days. Colors match the photos.",
-      "name": "Neha R.",
-      "place": "Indore"
-     }
-    },
-    "r3": {
-     "type": "quote",
-     "settings": {
-      "quote": "The size guide was accurate and the exchange was simple.",
-      "name": "Ayesha K.",
-      "place": "Mumbai"
-     }
-    },
-    "r4": {
-     "type": "quote",
-     "settings": {
-      "quote": "Beautiful embroidery and very good stitching.",
-      "name": "Sana M.",
-      "place": "Delhi"
-     }
-    }
-   },
-   "block_order": [
-    "r1",
-    "r2",
-    "r3",
-    "r4"
-   ],
-   "settings": {}
-  },
-  "seo": {
-   "type": "seo-text",
-   "settings": {}
-  }
- },
- "order": [
-  "slider",
-  "marq",
-  "cats",
-  "best",
-  "banners",
-  "occ",
-  "new",
-  "mosaic",
-  "reviews",
-  "seo"
- ]
+  "order": [
+    "slider",
+    "marq",
+    "capsules",
+    "story",
+    "best",
+    "pillars",
+    "mosaic",
+    "reviews",
+    "seo"
+  ]
 }

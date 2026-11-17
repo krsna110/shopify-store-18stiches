@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "lookbook": {
+      "type": "lookbook-gallery",
+      "settings": {
+        "eyebrow": "CAMPAIGN VOL. 01",
+        "heading": "The Festive Heritage Lookbook",
+        "subheading": "An editorial journey through shimmering handspun Chanderis, royal ruby silks, and understated contemporary drapery."
+      }
+    },
+    "capsules": {
+      "type": "capsule-showcase",
+      "settings": {
+        "eyebrow": "SHOP THE EDIT",
+        "heading": "Curated Capsule Drops",
+        "style": "arch"
+      }
+    }
+  },
+  "order": [
+    "lookbook",
+    "capsules"
+  ]
+}

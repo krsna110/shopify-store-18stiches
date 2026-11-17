@@ -1,0 +1,165 @@
+<section class="wrap block capsules-section" {{ section.shopify_attributes }}>
+  <div class="capsules__header center">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="capsules__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="capsules__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="capsules__subheading muted">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="capsules__grid capsules__grid--{{ section.settings.style }}">
+    {%- for block in section.blocks -%}
+      <div class="capsule-card" {{ block.shopify_attributes }}>
+        <a class="capsule-card__media-wrap" href="{{ block.settings.link | default: '/collections/all' }}">
+          <div class="capsule-card__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'capsule-card__img', alt: block.settings.title }}
+            {%- else -%}
+              {%- assign placeholder_index = forloop.index | modulo: 6 | plus: 1 -%}
+              {{ 'collection-' | append: placeholder_index | placeholder_svg_tag: 'placeholder' }}
+            {%- endif -%}
+          </div>
+          {%- if block.settings.badge != blank -%}
+            <span class="capsule-card__tag">{{ block.settings.badge }}</span>
+          {%- endif -%}
+        </a>
+        <div class="capsule-card__info">
+          {%- if block.settings.subtitle != blank -%}
+            <span class="capsule-card__subtitle">{{ block.settings.subtitle }}</span>
+          {%- endif -%}
+          <h3 class="capsule-card__title">
+            <a href="{{ block.settings.link | default: '/collections/all' }}">{{ block.settings.title }}</a>
+          </h3>
+          {%- if block.settings.description != blank -%}
+            <p class="capsule-card__desc">{{ block.settings.description }}</p>
+          {%- endif -%}
+          <a class="capsule-card__btn link" href="{{ block.settings.link | default: '/collections/all' }}">
+            {{ block.settings.button_text | default: 'Explore Capsule' }} &rarr;
+          </a>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Curated Capsule Edits",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CURATED RELEASES"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Signature Capsule Drops"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Intentionally designed in limited quantities. Once a capsule closes, it is archived."
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Card Arch Style",
+      "options": [
+        {"value": "arch", "label": "Heritage Arch Top"},
+        {"value": "rect", "label": "Clean Rectangular"}
+      ],
+      "default": "arch"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "capsule",
+      "name": "Capsule Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Capsule Image"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge Tag",
+          "default": "New Capsule"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Sub-label",
+          "default": "Limited Edition"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "The Festive Edit"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short Description",
+          "default": "Opulent silks and chanderi weaves adorned with delicate zari."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection Link"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Explore Capsule"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Curated Capsule Edits",
+      "blocks": [
+        {
+          "type": "capsule",
+          "settings": {
+            "title": "The Festive Edit",
+            "subtitle": "Edition 01",
+            "badge": "Bestseller",
+            "description": "Opulent silks and chanderi weaves adorned with delicate zari."
+          }
+        },
+        {
+          "type": "capsule",
+          "settings": {
+            "title": "The Chanderi & Silk Drop",
+            "subtitle": "Edition 02",
+            "badge": "Handwoven",
+            "description": "Featherlight handspun weaves designed for day-to-evening grace."
+          }
+        },
+        {
+          "type": "capsule",
+          "settings": {
+            "title": "Everyday Luxury & Co-ords",
+            "subtitle": "Edition 03",
+            "badge": "Contemporary",
+            "description": "Tailored modern silhouettes crafted with breathable organic cottons."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,124 @@
+<section class="wrap block faq-section" {{ section.shopify_attributes }}>
+  <div class="center faq__header">
+    {%- if section.settings.eyebrow != blank -%}<p class="faq__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.subheading != blank -%}<p class="muted narrow center">{{ section.settings.subheading }}</p>{%- endif -%}
+  </div>
+
+  <div class="faq__body narrow">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'category_heading' -%}
+        <h3 class="faq__cat-title" {{ block.shopify_attributes }}>{{ block.settings.title }}</h3>
+      {%- elsif block.type == 'faq_item' -%}
+        <details class="faq-item" {{ block.shopify_attributes }}>
+          <summary class="faq-item__question">
+            <span>{{ block.settings.question }}</span>
+            <span class="faq-item__icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-item__answer rte">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="center faq__footer">
+    <p class="muted">Have a specific question about your order or custom sizing?</p>
+    {%- if settings.whatsapp_number != blank -%}
+      <a class="btn btn--ghost" href="https://wa.me/{{ settings.whatsapp_number }}?text={{ 'Hi 18 Stitches, I have a question regarding an order.' | url_encode }}" target="_blank" rel="noopener">
+        Chat with Us on WhatsApp
+      </a>
+    {%- else -%}
+      <a class="btn btn--ghost" href="/pages/contact">
+        Contact Our Concierge
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Luxury FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "ASSISTANCE & CLIENT CARE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Everything you need to know about our handcrafted pieces, bespoke alterations, and deliveries."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_heading",
+      "name": "Category Header",
+      "settings": [
+        {"type": "text", "id": "title", "label": "Category Name", "default": "Orders & Custom Sizing"}
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "Question & Answer",
+      "settings": [
+        {"type": "text", "id": "question", "label": "Question", "default": "Can I get customized sizing or sleeves added?"},
+        {"type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Yes! We offer complimentary custom fit assistance and sleeve/length modifications. Simply connect with our concierge via WhatsApp after placing your order or prior to checkout.</p>"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury FAQ",
+      "blocks": [
+        {
+          "type": "category_heading",
+          "settings": {"title": "Craft & Fit"}
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I request custom measurements or sleeve additions?",
+            "answer": "<p>Yes. Every 18 Stitches silhouette comes with 2–3 inches of inner margin. If you require bespoke tailoring, select your closest size and message our WhatsApp concierge with your order number and exact measurements.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are your fabrics authentic handlooms?",
+            "answer": "<p>All our silks, chanderis, and organic cottons are procured directly from heritage weaver clusters. Minor slubs or yarn unevenness are hallmarks of genuine handwoven craftsmanship, not defects.</p>"
+          }
+        },
+        {
+          "type": "category_heading",
+          "settings": {"title": "Shipping & Alterations"}
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are your delivery timelines across India and internationally?",
+            "answer": "<p>Ready-to-ship capsules are dispatched within 24 to 48 hours and typically arrive within 3 to 5 business days in India. Bespoke orders require 7 to 10 days of artisan craftsmanship. International express shipping takes 6 to 10 days.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return and exchange policy?",
+            "answer": "<p>We offer hassle-free 7-day returns and size exchanges on all unworn, unwashed garments with original tags intact. Custom tailored or personalized garments are eligible for complimentary alterations.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
