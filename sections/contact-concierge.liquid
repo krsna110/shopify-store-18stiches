@@ -25,29 +25,20 @@
       </div>
 
       <div class="concierge__details">
-        <div class="concierge__item">
-          <strong>Atelier Hours</strong>
-          <span>Monday – Saturday: 10:00 AM – 7:00 PM IST</span>
-        </div>
-        <div class="concierge__item">
-          <strong>Email Inquiries</strong>
-          <span><a class="link" href="mailto:{{ section.settings.email | default: 'concierge@18stitches.com' }}">{{ section.settings.email | default: 'concierge@18stitches.com' }}</a></span>
-        </div>
-        <div class="concierge__item">
-          <strong>Studio Location</strong>
-          <span>{{ section.settings.address | default: '18 Stitches Design House, New Delhi / Jaipur, India' }}</span>
-        </div>
+
+        {%- if section.settings.email != blank -%}<div class="concierge__item"><strong>Email</strong><a class="link" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></div>{%- endif -%}
+        {%- if section.settings.address != blank -%}<div class="concierge__item"><strong>Address</strong><span>{{ section.settings.address }}</span></div>{%- endif -%}
       </div>
     </div>
 
     <div class="concierge__form-wrap">
       <div class="concierge__form-card">
         <h3>Send an Inquiry</h3>
-        <p class="muted">Fill out the form below and our stylist will respond within 24 hours.</p>
+        <p class="muted">Fill out the form below and we will get back to you.</p>
 
         {%- form 'contact', id: 'ContactForm', class: 'concierge-form' -%}
           {%- if form.posted_successfully? -%}
-            <p class="note" style="color: green; font-weight: 500;">Thank you for reaching out. An atelier stylist will be in touch shortly.</p>
+            <p class="note" style="color: green; font-weight: 500;">Thank you for reaching out. Your message has been sent.</p>
           {%- endif -%}
           {%- if form.errors -%}
             <p class="note note--err">{{ form.errors | default_errors }}</p>
@@ -111,19 +102,19 @@
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Whether you require assistance with sizing, festive gifting, or custom handcrafted silhouettes, our atelier team is here to assist you."
+      "default": "Questions about an order or our collections? Send us a message using the form."
     },
     {
       "type": "text",
       "id": "email",
       "label": "Concierge Email",
-      "default": "concierge@18stitches.com"
+      "default": ""
     },
     {
       "type": "text",
       "id": "address",
       "label": "Studio Address / City",
-      "default": "18 Stitches Design House, New Delhi / Jaipur, India"
+      "default": ""
     }
   ],
   "presets": [
@@ -131,4 +122,3 @@
   ]
 }
 {% endschema %}
-

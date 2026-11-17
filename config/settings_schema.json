@@ -1,12 +1,12 @@
 [
   {"name":"theme_info","theme_name":"18stiches","theme_author":"Khushi","theme_version":"1.0.0","theme_documentation_url":"https://help.shopify.com/manual/online-store/themes","theme_support_url":"https://help.shopify.com/"},
   {"name":"Colors","settings":[
-    {"type":"color","id":"color_ink","label":"Text","default":"#222222"},
-    {"type":"color","id":"color_paper","label":"Background","default":"#FFFFFF"},
-    {"type":"color","id":"color_accent","label":"Buttons, sale and links (berry)","default":"#A31D4E"},
-    {"type":"color","id":"color_gold","label":"Stars and highlights","default":"#C9A24B"},
-    {"type":"color","id":"color_mist","label":"Soft panels (blush)","default":"#FBF1F3"},
-    {"type":"color","id":"color_dark","label":"Footer and announcement bar","default":"#2B1B22"}
+    {"type":"color","id":"color_ink","label":"Text","default":"#292725"},
+    {"type":"color","id":"color_paper","label":"Background","default":"#F8F3ED"},
+    {"type":"color","id":"color_accent","label":"Buttons, sale and links (berry)","default":"#713D46"},
+    {"type":"color","id":"color_gold","label":"Stars and highlights","default":"#B99B7B"},
+    {"type":"color","id":"color_mist","label":"Soft panels (blush)","default":"#D9B7B1"},
+    {"type":"color","id":"color_dark","label":"Footer and announcement bar","default":"#343A32"}
   ]},
   {"name":"Typography","settings":[
     {"type":"paragraph","content":"Use any font name from fonts.google.com."},
@@ -18,7 +18,7 @@
     {"type":"textarea","id":"wishlist_snippet","label":"Wishlist app button code","info":"Paste the button HTML from your wishlist app. Use {PRODUCT_ID}, {PRODUCT_HANDLE} and {PRODUCT_URL} where the app needs them. While this is empty, a heart that saves in the visitor's browser is shown."}
   ]},
   {"name":"Store","settings":[
-    {"type":"number","id":"free_shipping_threshold","label":"Free shipping above (₹), 0 to hide","default":1999},
+    {"type":"number","id":"free_shipping_threshold","label":"Free shipping threshold (₹), 0 to hide until confirmed","default":0},
     {"type":"text","id":"whatsapp_number","label":"WhatsApp number with country code","info":"Digits only, e.g. 919876543210","default":""},
     {"type":"text","id":"social_instagram","label":"Instagram URL"},
     {"type":"text","id":"social_facebook","label":"Facebook URL"},

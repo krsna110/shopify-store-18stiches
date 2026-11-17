@@ -1,52 +1,11 @@
 {
   "sections": {
-    "size_guide": {
-      "type": "size-chart",
-      "settings": {
-        "eyebrow": "PERFECT SILHOUETTE",
-        "heading": "Size & Silhouette Guide",
-        "subheading": "All measurements reflect body measurements in inches and centimeters. All 18 Stitches garments feature 2-3 inches of extra inner margin for effortless personal tailoring."
-      }
-    },
-    "faq": {
-      "type": "faq-accordion",
-      "blocks": {
-        "cat1": {
-          "type": "category_heading",
-          "settings": {
-            "title": "Sizing & Tailoring Queries"
-          }
-        },
-        "faq1": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Can you customize the length or sleeves of a Kurta?",
-            "answer": "<p>Yes, absolutely! We provide complimentary custom length adjustments and sleeve additions. Please reach out to our WhatsApp concierge after placing your order with your order number.</p>"
-          }
-        },
-        "faq2": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How do I choose between two sizes?",
-            "answer": "<p>For Indian ethnic wear like Kurta sets, we recommend selecting the size that matches your bust measurement. If you prefer a relaxed, airy drape or are in between sizes, we recommend sizing up.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "cat1",
-        "faq1",
-        "faq2"
-      ],
-      "settings": {
-        "eyebrow": "STYLING ASSISTANCE",
-        "heading": "Tailoring & Fit Inquiries",
-        "subheading": "Still unsure about your sizing? Our master pattern makers are ready to assist you."
-      }
+    "main": {
+      "type": "main-page",
+      "settings": {}
     }
   },
   "order": [
-    "size_guide",
-    "faq"
+    "main"
   ]
 }
-

@@ -1,251 +1,92 @@
 {
   "sections": {
-    "slider": {
+    "hero": {
       "type": "hero-slider",
       "blocks": {
-        "s1": {
+        "main": {
           "type": "slide",
           "settings": {
-            "heading": "The Festive Heritage Edit",
-            "text": "Intricate handspun Chanderis and pure silks adorned with antique zari.",
-            "button_label": "Discover The Edit",
+            "heading": "Elegance, Woven Into Every Thread.",
+            "text": "Discover timeless Indian silhouettes and contemporary styles made for your everyday moments. Explore thoughtfully selected kurtis and co-ord sets that bring comfort and elegance together.",
+            "button_label": "EXPLORE COLLECTION",
             "link": "/collections/all"
           }
         },
-        "s2": {
+        "arrivals": {
           "type": "slide",
           "settings": {
-            "heading": "Slow Luxury, Master Stitched",
-            "text": "Limited capsule drops celebrating generational Indian handloom craftsmanship.",
-            "button_label": "Explore Capsules",
+            "heading": "Threads of Everyday Elegance.",
+            "text": "Explore the latest styles from 18STICHES.",
+            "button_label": "SHOP NEW ARRIVALS",
             "link": "/collections/all"
           }
         }
       },
       "block_order": [
-        "s1",
-        "s2"
+        "main",
+        "arrivals"
       ],
       "settings": {}
     },
-    "marq": {
-      "type": "marquee",
+    "categories": {
+      "type": "mosaic",
       "blocks": {
-        "a": {
-          "type": "item",
+        "kurtis": {
+          "type": "tile",
           "settings": {
-            "text": "Master Artisan Handloom"
-          }
-        },
-        "b": {
-          "type": "item",
-          "settings": {
-            "text": "Complimentary Custom Tailoring on WhatsApp"
-          }
-        },
-        "c": {
-          "type": "item",
-          "settings": {
-            "text": "Express Delivery Across India & Worldwide"
-          }
-        },
-        "d": {
-          "type": "item",
-          "settings": {
-            "text": "Generous 3-Inch Inner Margins"
-          }
-        },
-        "e": {
-          "type": "item",
-          "settings": {
-            "text": "Heirloom Finishing & French Seams"
-          }
-        }
-      },
-      "block_order": [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e"
-      ],
-      "settings": {}
-    },
-    "capsules": {
-      "type": "capsule-showcase",
-      "blocks": {
-        "c1": {
-          "type": "capsule",
-          "settings": {
-            "title": "The Festive Edit",
-            "subtitle": "Edition 01 • Pure Silks & Zari",
-            "badge": "Signature",
-            "description": "Opulent handloom Chanderi and pure raw silk kurta sets.",
-            "button_text": "Shop Capsule",
+            "title": "Kurtis",
             "link": "/collections/all"
           }
         },
-        "c2": {
-          "type": "capsule",
+        "coords": {
+          "type": "tile",
           "settings": {
-            "title": "The Silk & Chanderi Drop",
-            "subtitle": "Edition 02 • Featherlight Drapes",
-            "badge": "Handwoven",
-            "description": "Bespoke silhouettes designed for intimate celebrations.",
-            "button_text": "Shop Capsule",
-            "link": "/collections/all"
-          }
-        },
-        "c3": {
-          "type": "capsule",
-          "settings": {
-            "title": "Everyday Luxe & Co-ords",
-            "subtitle": "Edition 03 • Contemporary Ease",
-            "badge": "Limited Run",
-            "description": "Mindfully tailored linen and organic cotton fusion sets.",
-            "button_text": "Shop Capsule",
+            "title": "Co-ord Sets",
             "link": "/collections/all"
           }
         }
       },
       "block_order": [
-        "c1",
-        "c2",
-        "c3"
+        "kurtis",
+        "coords"
       ],
       "settings": {
-        "eyebrow": "LIMITED EDITIONS",
-        "heading": "Curated Capsule Drops",
-        "subheading": "Intentionally designed in limited runs of 20 to 30 pieces. Once archived, never repeated.",
-        "style": "arch"
+        "heading": "Shop by category"
+      }
+    },
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Bestsellers",
+        "layout": "grid",
+        "count": 4
+      }
+    },
+    "new_arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "New arrivals",
+        "layout": "grid",
+        "count": 4
       }
     },
     "story": {
       "type": "brand-story",
       "settings": {
-        "bg_color": "mist",
-        "eyebrow": "THE PHILOSOPHY OF 18 STITCHES",
-        "heading": "Where Ancient Loom Traditions Meet Contemporary Grace",
-        "quote": "Eighteen stitches in every inch—a master artisan's mark of patience, precision, and conscious luxury.",
-        "text": "<p>18 Stitches was born from an intimate reverence for India's textile provenance. Rejecting mass-market churn, each capsule is handcrafted in small batches, bridging the timeless artistry of Chanderi and Banarasi master weavers with effortless modern drapes.</p>",
-        "signature": "The 18 Stitches Atelier",
-        "signature_sub": "Handcrafted in India • Designed for Generations",
-        "button_label": "Read Our Full Story",
+        "eyebrow": "18STICHES",
+        "heading": "Everyday Style, Thoughtfully Woven.",
+        "quote": "Threads of Everyday Elegance.",
+        "text": "<p>Discover timeless Indian silhouettes and contemporary styles made for your everyday moments.</p>",
+        "button_label": "About 18STICHES",
         "button_link": "/pages/about"
       }
-    },
-    "best": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Curated Masterpieces",
-        "layout": "slider"
-      }
-    },
-    "pillars": {
-      "type": "craft-pillars",
-      "settings": {
-        "eyebrow": "THE 18 STITCHES PROMISE",
-        "heading": "Honoring the Soul of Indian Craftsmanship"
-      }
-    },
-    "mosaic": {
-      "type": "mosaic",
-      "blocks": {
-        "m1": {
-          "type": "tile",
-          "settings": {
-            "title": "The Festive Edit",
-            "link": "/collections/all"
-          }
-        },
-        "m2": {
-          "type": "tile",
-          "settings": {
-            "title": "Handcrafted Kurta Sets",
-            "link": "/collections/all"
-          }
-        },
-        "m3": {
-          "type": "tile",
-          "settings": {
-            "title": "Contemporary Co-ords",
-            "link": "/collections/all"
-          }
-        },
-        "m4": {
-          "type": "tile",
-          "settings": {
-            "title": "Bespoke Occasion Wear",
-            "link": "/collections/all"
-          }
-        }
-      },
-      "block_order": [
-        "m1",
-        "m2",
-        "m3",
-        "m4"
-      ],
-      "settings": {}
-    },
-    "reviews": {
-      "type": "testimonials",
-      "blocks": {
-        "r1": {
-          "type": "quote",
-          "settings": {
-            "quote": "The handwoven Chanderi feels like whisper-light silk. The attention to the inner finishing and margins is unmatched.",
-            "name": "Dr. Ananya R.",
-            "place": "New Delhi"
-          }
-        },
-        "r2": {
-          "type": "quote",
-          "settings": {
-            "quote": "Ordered for my sister's Sangeet ceremony. The gold zari work was so understated yet regal. Received endless compliments.",
-            "name": "Meera S.",
-            "place": "Mumbai"
-          }
-        },
-        "r3": {
-          "type": "quote",
-          "settings": {
-            "quote": "The WhatsApp styling team guided me on custom sleeve adjustments and it arrived tailored to perfection.",
-            "name": "Kavita M.",
-            "place": "Bengaluru"
-          }
-        },
-        "r4": {
-          "type": "quote",
-          "settings": {
-            "quote": "A truly premium Indian brand that respects slow craft. Beautiful packaging and heirloom quality.",
-            "name": "Radhika B.",
-            "place": "Jaipur"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4"
-      ],
-      "settings": {}
-    },
-    "seo": {
-      "type": "seo-text",
-      "settings": {}
     }
   },
   "order": [
-    "slider",
-    "marq",
-    "capsules",
-    "story",
-    "best",
-    "pillars",
-    "mosaic",
-    "reviews",
-    "seo"
+    "hero",
+    "categories",
+    "bestsellers",
+    "new_arrivals",
+    "story"
   ]
 }

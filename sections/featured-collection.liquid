@@ -5,8 +5,6 @@
   <div class="grid{% if section.settings.layout == 'slider' %} grid--slider{% endif %}">
     {%- if section.settings.collection != blank -%}
       {%- for product in section.settings.collection.products limit: section.settings.count -%}{% render 'product-card', product: product %}{%- endfor -%}
-    {%- else -%}
-      {%- for i in (1..4) -%}<article class="card"><div class="card__top"><div class="card__media">{{ 'product-' | append: i | placeholder_svg_tag: 'card__img placeholder' }}</div></div><div class="card__body"><span class="card__title">Product name</span><div class="price"><span class="price__now">₹1,499</span></div></div></article>{%- endfor -%}
     {%- endif -%}
   </div>
 </section>

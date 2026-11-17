@@ -26,7 +26,7 @@
             <div class="opt__legend-row">
               <legend>{{ option.name }}</legend>
               {%- if opt_down contains 'size' -%}
-                <a class="opt__guide-link link" href="/pages/size-guide" target="_blank">Size Guide &rarr;</a>
+                <a class="opt__guide-link link" href="/pages/size-guide">Size Guide &rarr;</a>
               {%- endif -%}
             </div>
             <div class="opt__vals">
@@ -47,12 +47,9 @@
       {%- if section.settings.show_payment_button -%}{{ form | payment_button }}{%- endif -%}
     {%- endform -%}
 
-    {%- if section.settings.show_whatsapp -%}
-      {%- capture wa -%}Hi, I would love styling & custom sizing advice for {{ product.title }} ({{ shop.url }}{{ product.url }}){%- endcapture -%}
-      {%- assign wa_num = settings.whatsapp_number | default: '919876543210' -%}
-      <a class="btn btn--ghost btn--block btn--wa" href="https://wa.me/{{ wa_num }}?text={{ wa | url_encode }}" target="_blank" rel="noopener">
-        <span>💬</span> Styling Concierge & Custom Sizing
-      </a>
+    {%- if section.settings.show_whatsapp and settings.whatsapp_number != blank -%}
+      {%- capture wa -%}Hi, I would love styling advice for {{ product.title }} ({{ shop.url }}{{ product.url }}){%- endcapture -%}
+      <a class="btn btn--ghost btn--block btn--wa" href="https://wa.me/{{ settings.whatsapp_number }}?text={{ wa | url_encode }}" target="_blank" rel="noopener">Contact us on WhatsApp</a>
     {%- endif -%}
 
     {%- if section.settings.perks != blank -%}<ul class="perks">{%- assign perk_list = section.settings.perks | newline_to_br | split: '<br />' -%}{%- for perk in perk_list -%}{%- if perk != blank -%}<li>{{ perk | strip_newlines | escape }}</li>{%- endif -%}{%- endfor -%}</ul>{%- endif -%}
@@ -70,9 +67,9 @@
 {{ product | structured_data }}
 {% schema %}
 {"name":"Product","settings":[
- {"type":"textarea","id":"perks","label":"Highlights under the button (one per line)","default":"Free shipping on orders above the free-shipping amount\n7-day easy returns and exchanges\nSecure payments"},
+ {"type":"textarea","id":"perks","label":"Highlights under the button (one per line)","default":""},
  {"type":"checkbox","id":"show_payment_button","label":"Show Buy it now button","default":false},
- {"type":"checkbox","id":"show_whatsapp","label":"Show WhatsApp button","info":"Needs a WhatsApp number in Theme settings > Store.","default":true}
+ {"type":"checkbox","id":"show_whatsapp","label":"Show WhatsApp button","info":"Needs a WhatsApp number in Theme settings > Store.","default":false}
 ],
 "blocks":[{"type":"@app"},{"type":"accordion","name":"Info section","settings":[{"type":"text","id":"title","label":"Title","default":"Info"},{"type":"richtext","id":"content","label":"Content"}]}]}
 {% endschema %}
