@@ -16,7 +16,7 @@
     {% render 'price', product: product %}
     <p class="muted">Inclusive of all taxes.</p>
 
-    {%- form 'product', product, id: 'ProductForm', class: 'buy', 'data-product-form': '' -%}
+    {%- form 'product', product, id: 'ProductForm', class: 'buy', data-product-form: '' -%}
       <input type="hidden" name="id" value="{{ current.id }}" data-variant-id>
       {%- unless product.has_only_default_variant -%}
         {%- for option in product.options_with_values -%}
