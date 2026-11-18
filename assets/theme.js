@@ -27,6 +27,12 @@ const showCartError=message=>{const m=$('[data-cart-error]',drawer);if(m){m.text
 document.addEventListener('click',async e=>{
  const searchOpen=e.target.closest('[data-search-open]');if(searchOpen){e.preventDefault();openSearch(searchOpen);return}
  const searchClose=e.target.closest('[data-search-close]');if(searchClose){closeSearch();return}
+ const submenuToggle=e.target.closest('[data-submenu-toggle]');if(submenuToggle){
+  const item=submenuToggle.closest('.has-sub'),expanded=submenuToggle.getAttribute('aria-expanded')==='true';
+  $$('.has-sub.is-expanded',item?.parentElement).forEach(openItem=>{if(openItem!==item){openItem.classList.remove('is-expanded');const button=$('[data-submenu-toggle]',openItem);button?.setAttribute('aria-expanded','false');button?.setAttribute('aria-label',`Show ${openItem.querySelector(':scope > a')?.textContent.trim()||'menu'} submenu`)}});
+  item?.classList.toggle('is-expanded',!expanded);submenuToggle.setAttribute('aria-expanded',String(!expanded));
+  submenuToggle.setAttribute('aria-label',`${expanded?'Show':'Hide'} ${item?.querySelector(':scope > a')?.textContent.trim()||'menu'} submenu`);return;
+ }
  const thumb=e.target.closest('[data-gallery-thumb]');
  if(thumb){
   const sec=thumb.closest('[data-product-section]'),slide=sec?.querySelector(`[data-media-id="${thumb.dataset.galleryThumb}"]`);
@@ -42,7 +48,7 @@ document.addEventListener('click',async e=>{
  const guideClose=e.target.closest('[data-size-guide-close]');if(guideClose){guideClose.closest('dialog')?.close();return}
  const t=e.target.closest('[data-cart-open],[data-cart-close],[data-qty],[data-menu-toggle]');
  if(!t)return;
- if(t.matches('[data-menu-toggle]')){const h=$('[data-header]');const o=h.classList.toggle('is-open');t.setAttribute('aria-expanded',o);t.setAttribute('aria-label',o?'Close menu':'Open menu')}
+ if(t.matches('[data-menu-toggle]')){const h=$('[data-header]');const o=h.classList.toggle('is-open');t.setAttribute('aria-expanded',o);t.setAttribute('aria-label',o?'Close menu':'Open menu');if(!o)$$('[data-submenu-toggle]',h).forEach(b=>{b.setAttribute('aria-expanded','false');b.setAttribute('aria-label',`Show ${b.closest('.has-sub')?.querySelector(':scope > a')?.textContent.trim()||'menu'} submenu`);b.closest('.has-sub')?.classList.remove('is-expanded')})}
  else if(t.matches('[data-cart-open]')){cartOpener=t;if(drawer&&!document.body.classList.contains('template-cart')){e.preventDefault();openDrawer()}}
  else if(t.matches('[data-cart-close]')){closeDrawer()}
  else if(t.matches('[data-qty]')){
@@ -68,12 +74,13 @@ document.addEventListener('keydown',e=>{
  }
  if(e.key==='Escape'&&searchDrawer?.classList.contains('is-open')){closeSearch();return}
  if(e.key!=='Escape')return;
+ const openSubmenu=$('.has-sub.is-expanded [data-submenu-toggle]');if(openSubmenu){const item=openSubmenu.closest('.has-sub');item?.classList.remove('is-expanded');openSubmenu.setAttribute('aria-expanded','false');openSubmenu.setAttribute('aria-label',`Show ${item?.querySelector(':scope > a')?.textContent.trim()||'menu'} submenu`);openSubmenu.focus();return}
  if(drawer?.classList.contains('is-open'))closeDrawer();
  if($('[data-filters]')?.classList.contains('is-open')){
   $('[data-filters]').classList.remove('is-open');document.body.classList.remove('filters-open','lock');filterOpener?.setAttribute('aria-expanded','false');filterOpener?.focus();
  }
  const h=$('[data-header]'),menu=$('[data-menu-toggle]',h);
- if(h?.classList.contains('is-open')){h.classList.remove('is-open');menu?.setAttribute('aria-expanded','false');menu?.setAttribute('aria-label','Open menu');menu?.focus()}
+ if(h?.classList.contains('is-open')){h.classList.remove('is-open');menu?.setAttribute('aria-expanded','false');menu?.setAttribute('aria-label','Open menu');$$('[data-submenu-toggle]',h).forEach(b=>{b.setAttribute('aria-expanded','false');b.setAttribute('aria-label',`Show ${b.closest('.has-sub')?.querySelector(':scope > a')?.textContent.trim()||'menu'} submenu`);b.closest('.has-sub')?.classList.remove('is-expanded')});menu?.focus()}
 });
 const msg=(f,t)=>{const m=$('[data-form-msg]',f);if(m)m.textContent=t||''};
 document.addEventListener('submit',async e=>{

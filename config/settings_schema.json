@@ -1,12 +1,12 @@
 [
   {"name":"theme_info","theme_name":"18stiches","theme_author":"Khushi","theme_version":"1.0.0","theme_documentation_url":"https://help.shopify.com/manual/online-store/themes","theme_support_url":"https://help.shopify.com/"},
   {"name":"Colors","settings":[
-    {"type":"color","id":"color_ink","label":"Text","default":"#292725"},
-    {"type":"color","id":"color_paper","label":"Background","default":"#F8F3ED"},
-    {"type":"color","id":"color_accent","label":"Buttons, sale and links (berry)","default":"#713D46"},
-    {"type":"color","id":"color_gold","label":"Stars and highlights","default":"#B99B7B"},
-    {"type":"color","id":"color_mist","label":"Soft panels (blush)","default":"#D9B7B1"},
-    {"type":"color","id":"color_dark","label":"Footer and announcement bar","default":"#343A32"}
+    {"type":"color","id":"color_ink","label":"Charcoal text","default":"#302E2B"},
+    {"type":"color","id":"color_paper","label":"Warm ivory background","default":"#F7F3ED"},
+    {"type":"color","id":"color_accent","label":"Deep wine accents","default":"#69434A"},
+    {"type":"color","id":"color_gold","label":"Taupe highlights","default":"#B99A83"},
+    {"type":"color","id":"color_mist","label":"Sand panels","default":"#D8C8B8"},
+    {"type":"color","id":"color_dark","label":"Footer and announcement bar","default":"#302E2B"}
   ]},
   {"name":"Typography","settings":[
     {"type":"paragraph","content":"Use any font name from fonts.google.com."},

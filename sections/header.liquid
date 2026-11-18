@@ -12,9 +12,13 @@
           <li{% if link.links.size > 0 %} class="has-sub"{% endif %}>
             <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
             {%- if link.links.size > 0 -%}
+              {%- assign submenu_id = 'Menu-' | append: section.id | append: '-' | append: forloop.index -%}
+              <button class="nav__submenu-toggle" type="button" data-submenu-toggle aria-label="Show {{ link.title | escape }} submenu" aria-expanded="false" aria-controls="{{ submenu_id }}">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m2 4 4 4 4-4"/></svg>
+              </button>
               {%- assign has_grand = false -%}
               {%- for c in link.links -%}{%- if c.links.size > 0 -%}{%- assign has_grand = true -%}{%- endif -%}{%- endfor -%}
-              <div class="mega"><div class="mega__in">
+              <div class="mega" id="{{ submenu_id }}"><div class="mega__in">
                 <div class="mega__cols">
                   {%- if has_grand -%}
                     {%- for c in link.links -%}

@@ -1,4 +1,4 @@
-:root{--ink:#222222;--paper:#FFFFFF;--accent:#A31D4E;--gold:#C9A24B;--mist:#FBF1F3;--dark:#2B1B22;--hd:'Cormorant Garamond',Georgia,serif;--bd:'DM Sans',system-ui,sans-serif}
+:root{--ink:#302E2B;--paper:#F7F3ED;--accent:#69434A;--gold:#B99A83;--mist:#D8C8B8;--dark:#302E2B;--wine:#69434A;--sand:#D8C8B8;--taupe:#B99A83;--olive:#302E2B;--charcoal:#302E2B;--white:#FFFFFF;--hd:'Cormorant Garamond',Georgia,serif;--bd:'DM Sans',system-ui,sans-serif}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--bd)}
@@ -185,7 +185,10 @@ h2{font-size:clamp(1.6rem,3vw,2.3rem)}
 .nav a:hover,.nav a[aria-current]{text-decoration:none;color:var(--accent)}
 .has-sub{position:static}
 .mega{position:absolute;left:0;right:0;top:100%;background:#fff;border-top:1px solid var(--mist);box-shadow:0 22px 30px -22px rgb(0 0 0/.2);display:none}
-.has-sub:hover>.mega,.has-sub:focus-within>.mega{display:block}
+.has-sub.is-expanded>.mega{display:block}
+.nav__submenu-toggle{display:inline-grid;place-items:center;width:28px;height:32px;margin-left:2px;padding:0;border:0;background:transparent;color:inherit;cursor:pointer;vertical-align:middle}
+.nav__submenu-toggle svg{width:12px;height:12px;transition:transform .2s ease}
+.has-sub.is-expanded>.nav__submenu-toggle svg{transform:rotate(180deg)}
 .mega__in{max-width:1320px;margin:0 auto;padding:30px clamp(16px,3vw,40px);display:flex;gap:40px;justify-content:space-between}
 .mega__cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;flex:1}
 .nav .mega__head{display:block;padding:0;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;color:var(--accent)}
@@ -197,9 +200,14 @@ h2{font-size:clamp(1.6rem,3vw,2.3rem)}
 @media(max-width:900px){
   .header__row{height:60px}
   .nav>ul>li>a{height:auto;padding:12px 0}
-  .mega{position:static;display:block;box-shadow:none;border:0}
+  .mega{position:static;box-shadow:none;border:0}
   .mega__in{display:block;padding:0 0 8px 14px}.mega__cols{display:block}
   .mega__promo{display:none}.nav .mega__head{margin:8px 0 2px}
+  .nav>ul>li.has-sub{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+  .nav>ul>li.has-sub>.mega{grid-column:1/-1;width:100%}
+  .nav>ul>li.has-sub>.nav__submenu-toggle{grid-column:2;grid-row:1}
+  .nav>ul>li.has-sub>.mega__in{grid-row:2}
+  .nav .mega__head{font-size:.72rem}
 }
 
 .slider{position:relative}
@@ -867,10 +875,14 @@ h2{font-size:clamp(1.6rem,3vw,2.3rem)}
 /* 18STICHES editorial storefront */
 body{background:var(--paper);color:var(--ink);letter-spacing:.005em}
 .announce{background:var(--olive);color:var(--paper);padding:7px 16px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
-.header{background:rgb(248 243 237/.97);backdrop-filter:saturate(120%) blur(8px);border-color:rgb(52 58 50/.14)}
-.header__row{height:78px}
-.header__logo{font:500 1.65rem/1 var(--bd);letter-spacing:.17em;color:var(--wine)}
+.header{background:color-mix(in srgb,var(--paper) 97%,transparent);backdrop-filter:saturate(120%) blur(8px);border-color:color-mix(in srgb,var(--ink) 14%,transparent)}
+.header__row{height:auto;grid-template-rows:68px 44px;padding-bottom:0}
+.header__logo{font:500 1.8rem/1 var(--hd);letter-spacing:.12em;color:var(--wine);text-transform:none}
 .header__logo img{max-height:48px}
+.nav{grid-column:1/-1!important;grid-row:2!important;justify-self:center}
+.nav>ul{justify-content:center}
+.nav__submenu-toggle{color:var(--ink);transition:color .2s ease}
+.nav__submenu-toggle:hover{color:var(--wine)}
 .nav>ul{gap:clamp(14px,2vw,30px)}
 .nav a{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase}
 .icon-btn{transition:color .2s ease,background .2s ease}
@@ -947,12 +959,14 @@ body{background:var(--paper);color:var(--ink);letter-spacing:.005em}
 @media(min-width:901px) and (max-width:1150px){
   .nav>ul{gap:8px}
   .nav a{font-size:.66rem;letter-spacing:.06em}
-  .header__logo{font-size:1.35rem;letter-spacing:.12em}
+  .header__row{grid-template-rows:62px 42px}
+  .header__logo{font-size:1.55rem;letter-spacing:.1em}
   .header__icons .icon-btn{width:36px}
 }
 @keyframes editorial-rise{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
 @media(max-width:900px){
-  .header__row{height:66px}
+  .header__row{height:66px;grid-template-rows:none;padding-bottom:0}
+  .nav{grid-column:auto!important;grid-row:auto!important;justify-self:stretch}
   .nav{background:var(--paper);box-shadow:0 14px 24px rgb(41 39 37/.08)}
   .nav>ul{gap:0}
   .nav a{font-size:.82rem}

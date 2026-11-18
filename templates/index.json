@@ -13,52 +13,31 @@
           }
         }
       },
-      "block_order": [
-        "main"
-      ],
+      "block_order": ["main"],
       "settings": {}
     },
     "categories": {
       "type": "mosaic",
       "blocks": {
-        "kurtis": {
-          "type": "tile",
-          "settings": {
-            "title": "Kurtis"
-          }
-        },
-        "coords": {
-          "type": "tile",
-          "settings": {
-            "title": "Co-ord Sets"
-          }
-        }
+        "sarees": {"type": "tile", "settings": {"title": "Sarees"}},
+        "kurta_sets": {"type": "tile", "settings": {"title": "Kurta Sets"}},
+        "kurtis": {"type": "tile", "settings": {"title": "Kurtis"}},
+        "coords": {"type": "tile", "settings": {"title": "Co-ord Sets"}}
       },
-      "block_order": [
-        "kurtis",
-        "coords"
-      ],
-      "settings": {
-        "heading": "Shop by category"
-      }
-    },
-    "bestsellers": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Bestsellers",
-        "layout": "grid",
-        "count": 4,
-        "show_quick_add": true
-      }
+      "block_order": ["sarees", "kurta_sets", "kurtis", "coords"],
+      "settings": {"heading": "Shop by category"}
     },
     "new_arrivals": {
       "type": "featured-collection",
-      "settings": {
-        "heading": "New Arrivals",
-        "layout": "grid",
-        "count": 4,
-        "show_quick_add": true
-      }
+      "settings": {"heading": "New Arrivals", "layout": "grid", "count": 4, "show_quick_add": true}
+    },
+    "featured_sarees": {
+      "type": "featured-collection",
+      "settings": {"heading": "Featured Sarees", "layout": "grid", "count": 4, "show_quick_add": true}
+    },
+    "featured_kurta_sets": {
+      "type": "featured-collection",
+      "settings": {"heading": "Featured Kurta Sets", "layout": "grid", "count": 4, "show_quick_add": true}
     },
     "story": {
       "type": "brand-story",
@@ -71,15 +50,9 @@
         "button_link": "/pages/about"
       }
     },
-    "editorial": {
-      "type": "editorial-banner",
-      "settings": {
-        "eyebrow": "18STICHES",
-        "heading": "A softer kind of statement.",
-        "text": "Explore considered silhouettes for your everyday wardrobe.",
-        "button_label": "Explore the collection",
-        "link": "/collections/all"
-      }
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": {"heading": "Bestsellers", "layout": "grid", "count": 4, "show_quick_add": true}
     },
     "newsletter": {
       "type": "newsletter",
@@ -92,13 +65,5 @@
       }
     }
   },
-  "order": [
-    "hero",
-    "categories",
-    "bestsellers",
-    "new_arrivals",
-    "story",
-    "editorial",
-    "newsletter"
-  ]
+  "order": ["hero", "categories", "new_arrivals", "featured_sarees", "featured_kurta_sets", "story", "bestsellers", "newsletter"]
 }
