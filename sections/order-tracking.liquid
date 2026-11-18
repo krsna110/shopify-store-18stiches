@@ -1,0 +1,37 @@
+<section class="wrap block customer-page customer-tracking-page">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="{{ routes.root_url }}">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Order tracking</li></ol></nav>
+  <header class="customer-page__head"><p class="about-editorial__eyebrow">18STICHES CUSTOMER CARE</p><h1>Order tracking</h1><p>Order-specific information is available through Shopify customer accounts and order status pages.</p></header>
+  {%- if customer -%}
+    {% paginate customer.orders by 10 %}
+      {%- if customer.orders.size > 0 -%}
+        <div class="customer-orders__list">
+          {%- for order in customer.orders -%}
+            <article class="customer-order customer-order--tracking">
+              <header><div><h2>{{ order.name | escape }}</h2><p>Placed {{ order.created_at | time_tag: format: 'date' }}</p></div>
+                {%- if order.fulfillment_status_label != blank -%}<span>{{ order.fulfillment_status_label | escape }}</span>{%- endif -%}
+              </header>
+              {%- assign has_tracking = false -%}
+              {%- for fulfillment in order.fulfillments -%}{%- if fulfillment.tracking_url != blank or fulfillment.tracking_number != blank -%}{%- assign has_tracking = true -%}{%- endif -%}{%- endfor -%}
+              {%- if has_tracking -%}
+                <ul class="customer-tracking__links">
+                  {%- for fulfillment in order.fulfillments -%}
+                    {%- if fulfillment.tracking_url != blank or fulfillment.tracking_number != blank -%}
+                      <li>{%- if fulfillment.tracking_company != blank -%}<span>{{ fulfillment.tracking_company | escape }}{% if fulfillment.tracking_number != blank %} · {{ fulfillment.tracking_number | escape }}{% endif %}</span>{%- elsif fulfillment.tracking_number != blank -%}<span>{{ fulfillment.tracking_number | escape }}</span>{%- endif -%}{%- if fulfillment.tracking_url != blank -%}<a href="{{ fulfillment.tracking_url }}">Track shipment</a>{%- endif -%}</li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              <div class="customer-order__links">{%- if order.order_status_url != blank -%}<a class="btn btn--ghost" href="{{ order.order_status_url }}">Shopify order status</a>{%- endif -%}<a class="link" href="{{ order.customer_url }}">Order details</a></div>
+            </article>
+          {%- endfor -%}
+        </div>
+        {% render 'pagination', paginate: paginate %}
+      {%- else -%}<div class="customer-empty"><p>No orders are available in this account.</p><a class="btn" href="{{ routes.all_products_collection_url }}">Explore the collection</a></div>{%- endif -%}
+    {% endpaginate %}
+  {%- else -%}
+    <div class="customer-login-prompt"><p>Sign in to view order-specific details. Shopify will show order status and tracking links when they are available for an order.</p><a class="btn" href="{{ routes.account_login_url }}?return_url={{ request.path | url_encode }}">Sign in to your account</a><a class="link" href="{{ routes.account_url }}">Open customer accounts</a></div>
+  {%- endif -%}
+</section>
+{% schema %}
+{"name":"Order tracking","settings":[]}
+{% endschema %}

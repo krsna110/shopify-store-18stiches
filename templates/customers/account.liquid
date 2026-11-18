@@ -1,0 +1,21 @@
+<section class="wrap block customer-page">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="{{ routes.root_url }}">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">My account</li></ol></nav>
+  <header class="customer-page__head customer-page__head--row"><div><p class="about-editorial__eyebrow">18STICHES ACCOUNT</p><h1>Welcome{% if customer.first_name != blank %}, {{ customer.first_name | escape }}{% endif %}</h1><p>{{ customer.email | escape }}</p></div><nav class="customer-nav" aria-label="Account navigation"><a href="{{ routes.account_url }}" aria-current="page">Orders</a><a href="{{ routes.account_addresses_url }}">Addresses</a><a href="{{ routes.account_logout_url }}">Sign out</a></nav></header>
+  {% paginate customer.orders by 10 %}
+    <section class="customer-orders"><h2>Order history</h2>
+      {%- if customer.orders.size == 0 -%}<p class="customer-empty">You have no orders yet. <a href="{{ routes.all_products_collection_url }}">Explore the collection</a>.</p>
+      {%- else -%}
+        <div class="customer-orders__list">
+          {%- for order in customer.orders -%}
+            <article class="customer-order">
+              <header><div><h3><a href="{{ order.customer_url }}">{{ order.name | escape }}</a></h3><p>{{ order.created_at | time_tag: format: 'date' }}</p></div><strong>{{ order.total_price | money }}</strong></header>
+              <dl><div><dt>Payment</dt><dd>{{ order.financial_status_label | escape }}</dd></div>{%- if order.fulfillment_status_label != blank -%}<div><dt>Fulfillment</dt><dd>{{ order.fulfillment_status_label | escape }}</dd></div>{%- endif -%}</dl>
+              <div class="customer-order__links"><a class="link" href="{{ order.customer_url }}">View order details</a>{%- if order.order_status_url != blank -%}<a class="link" href="{{ order.order_status_url }}">Shopify order status</a>{%- endif -%}</div>
+            </article>
+          {%- endfor -%}
+        </div>
+        {% render 'pagination', paginate: paginate %}
+      {%- endif -%}
+    </section>
+{% endpaginate %}
+</section>

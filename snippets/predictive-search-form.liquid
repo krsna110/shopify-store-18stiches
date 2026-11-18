@@ -1,0 +1,12 @@
+{%- assign search_id = id | default: 'StoreSearch' -%}
+<div class="predictive-search" data-predictive-search>
+  <form class="searchbar" action="{{ routes.search_url }}" method="get" role="search" data-predictive-form>
+    <label class="sr" for="{{ search_id }}Input">Search the store</label>
+    <input id="{{ search_id }}Input" type="search" name="q" value="{{ value | escape }}" placeholder="Search kurtis, co-ord sets and more" autocomplete="off" autocapitalize="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="{{ search_id }}Suggestions" data-predictive-input>
+    <input type="hidden" name="type" value="product">
+    <button class="searchbar__clear" type="button" data-search-clear aria-label="Clear search" {% if value == blank %}disabled{% endif %}>Clear</button>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <ul class="predictive-search__results" id="{{ search_id }}Suggestions" role="listbox" aria-label="Product suggestions" data-predictive-results hidden></ul>
+  <p class="predictive-search__status" data-predictive-status role="status" aria-live="polite"></p>
+</div>

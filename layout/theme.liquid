@@ -28,7 +28,8 @@
   <main id="Main" tabindex="-1">{{ content_for_layout }}</main>
   {% sections 'footer-group' %}
   {% section 'cart-drawer' %}
-  <script>window.theme={routes:{root:{{ routes.root_url | json }},cart:{{ routes.cart_url | json }},cart_add:{{ routes.cart_add_url | json }},cart_change:{{ routes.cart_change_url | json }}},money:{{ shop.money_format | json }}};</script>
+  {% section 'search-drawer' %}
+  <script>window.theme={routes:{root:{{ routes.root_url | json }},cart:{{ routes.cart_url | json }},cart_add:{{ routes.cart_add_url | json }},cart_change:{{ routes.cart_change_url | json }},predictive_search:{{ routes.predictive_search_url | json }}},money:{{ shop.money_format | json }}};</script>
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
 </body>
 </html>

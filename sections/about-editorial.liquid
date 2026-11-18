@@ -1,0 +1,73 @@
+<article class="about-editorial">
+  <section class="about-editorial__hero{% if section.settings.hero_image == blank %} about-editorial__hero--plain{% endif %}">
+    {%- if section.settings.hero_image != blank -%}
+      <div class="about-editorial__hero-media">{{ section.settings.hero_image | image_url: width: 2200 | image_tag: loading: 'eager', widths: '750, 1100, 1500, 1800, 2200', sizes: '100vw', alt: section.settings.hero_image.alt | default: '18STICHES fashion collection' }}</div>
+    {%- endif -%}
+    <div class="about-editorial__hero-copy">
+      <p class="about-editorial__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1>{{ section.settings.heading | escape }}</h1>
+      <p>{{ section.settings.tagline | escape }}</p>
+      <a class="btn" href="{{ section.settings.shop_link | default: routes.all_products_collection_url }}">{{ section.settings.shop_label | escape }}</a>
+    </div>
+  </section>
+
+  <section class="about-editorial__intro wrap block">
+    <p class="about-editorial__eyebrow">{{ section.settings.intro_eyebrow | escape }}</p>
+    <h2>{{ section.settings.intro_heading | escape }}</h2>
+    <div class="rte">{{ section.settings.intro_text }}</div>
+  </section>
+
+  {%- if section.settings.story_image != blank or section.settings.story_text != blank -%}
+    <section class="about-editorial__story wrap block">
+      {%- if section.settings.story_image != blank -%}<div class="about-editorial__story-image">{{ section.settings.story_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 750, 1000, 1200', sizes: '(min-width: 900px) 50vw, 100vw', alt: section.settings.story_image.alt | default: section.settings.story_heading }}</div>{%- endif -%}
+      <div class="about-editorial__story-copy">
+        <p class="about-editorial__eyebrow">{{ section.settings.story_eyebrow | escape }}</p>
+        <h2>{{ section.settings.story_heading | escape }}</h2>
+        <div class="rte">{{ section.settings.story_text }}</div>
+      </div>
+    </section>
+  {%- endif -%}
+
+  <section class="about-editorial__why wrap block">
+    <header><p class="about-editorial__eyebrow">{{ section.settings.why_eyebrow | escape }}</p><h2>{{ section.settings.why_heading | escape }}</h2></header>
+    <div class="about-editorial__values">
+      {%- for block in section.blocks -%}
+        <article class="about-editorial__value" {{ block.shopify_attributes }}>
+          <span class="about-editorial__value-index">0{{ forloop.index }}</span>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <div class="rte">{{ block.settings.text }}</div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </section>
+</article>
+
+{% schema %}
+{
+  "name": "About 18STICHES",
+  "settings": [
+    {"type":"image_picker","id":"hero_image","label":"Editorial hero image"},
+    {"type":"text","id":"eyebrow","label":"Hero eyebrow","default":"18STICHES"},
+    {"type":"text","id":"heading","label":"Hero heading","default":"Everyday Style, Thoughtfully Chosen."},
+    {"type":"text","id":"tagline","label":"Tagline","default":"Threads of Everyday Elegance."},
+    {"type":"text","id":"shop_label","label":"Shop button label","default":"EXPLORE THE COLLECTION"},
+    {"type":"url","id":"shop_link","label":"Shop button link"},
+    {"type":"text","id":"intro_eyebrow","label":"Introduction eyebrow","default":"OUR BRAND"},
+    {"type":"text","id":"intro_heading","label":"Introduction heading","default":"Indian style for everyday moments."},
+    {"type":"richtext","id":"intro_text","label":"Introduction copy","default":"<p>18STICHES brings together women's kurtis and co-ord sets. Discover styles for everyday wear and the moments you choose to make special.</p>"},
+    {"type":"image_picker","id":"story_image","label":"Story image"},
+    {"type":"text","id":"story_eyebrow","label":"Story eyebrow","default":"THREADS OF EVERYDAY ELEGANCE"},
+    {"type":"text","id":"story_heading","label":"Story heading","default":"A wardrobe shaped around your day."},
+    {"type":"richtext","id":"story_text","label":"Story and philosophy copy","default":"<p>Our edit brings together two familiar expressions of Indian women's fashion: kurtis and co-ord sets. Explore each piece through its product details, images and available options.</p>"},
+    {"type":"text","id":"why_eyebrow","label":"Why section eyebrow","default":"THE 18STICHES EDIT"},
+    {"type":"text","id":"why_heading","label":"Why section heading","default":"A considered place to discover your next look."}
+  ],
+  "blocks": [
+    {"type":"value","name":"Brand value","settings":[
+      {"type":"text","id":"title","label":"Title","default":"Women's Kurtis"},
+      {"type":"richtext","id":"text","label":"Description","default":"<p>Browse kurtis across the styles and options available in the collection.</p>"}
+    ]}
+  ],
+  "presets": [{"name":"About 18STICHES","blocks":[{"type":"value"},{"type":"value","settings":{"title":"Co-ord Sets","text":"<p>Explore women's co-ord sets and their product details.</p>"}},{"type":"value","settings":{"title":"Your Everyday Edit","text":"<p>Discover pieces selected for the way you choose to dress.</p>"}}]}]
+}
+{% endschema %}

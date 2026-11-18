@@ -1,10 +1,23 @@
 {%- paginate collection.products by section.settings.per_page -%}
 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
 <section class="wrap block">
-  <div class="page-head"><h1>{{ collection.title }}</h1>{%- if collection.description != blank -%}<div class="rte">{{ collection.description }}</div>{%- endif -%}</div>
-  <div class="plp">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol><li><a href="{{ routes.root_url }}">Home</a></li><li aria-hidden="true">/</li><li><a href="{{ routes.all_products_collection_url }}">Shop all</a></li><li aria-hidden="true">/</li><li aria-current="page">{{ collection.title | escape }}</li></ol>
+  </nav>
+  {%- assign banner_image = section.settings.banner_image | default: collection.image -%}
+  <header class="collection-hero{% if banner_image == blank %} collection-hero--plain{% endif %}">
+    {%- if banner_image != blank -%}<div class="collection-hero__media">{{ banner_image | image_url: width: 2200 | image_tag: loading: 'eager', widths: '750, 1100, 1500, 1800, 2200', sizes: '100vw', alt: banner_image.alt | default: collection.title }}</div>{%- endif -%}
+    <div class="collection-hero__content">
+      <p class="collection-hero__eyebrow">18STICHES</p>
+      <h1>{{ section.settings.heading | default: collection.title | escape }}</h1>
+      {%- if section.settings.description != blank -%}<div class="rte">{{ section.settings.description }}</div>
+      {%- elsif collection.description != blank -%}<div class="rte">{{ collection.description }}</div>{%- endif -%}
+    </div>
+  </header>
+  <div class="plp{% if collection.filters.size == 0 %} plp--no-filters{% endif %}">
+    {%- if collection.filters.size > 0 -%}
     <div class="filters-veil" data-filter-close></div>
-    <aside class="filters" data-filters aria-label="Filters">
+    <aside class="filters" id="CollectionFilters-{{ section.id }}" data-filters aria-label="Collection filters">
       <div class="filters__head"><h2>Filters</h2><button class="icon-btn" type="button" data-filter-close aria-label="Close filters">✕</button></div>
       <form id="FilterForm" data-filter-form method="get">
         {%- for filter in collection.filters -%}
@@ -27,7 +40,7 @@
                   {%- for value in filter.values -%}
                     <label class="check{% if is_color %} check--color{% endif %}">
                       <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
-                      {%- if is_color -%}<i class="sw" style="background:{{ value.swatch.color | default: value.label | handleize | remove: '-' }}"></i>{%- endif -%}
+                      {%- if is_color and value.swatch != blank -%}<i class="sw"{% if value.swatch.color %} style="background-color:{{ value.swatch.color }}"{% elsif value.swatch.image %} style="background-image:url('{{ value.swatch.image | image_url: width: 48 }}')"{% endif %} aria-hidden="true"></i>{%- endif -%}
                       <span>{{ value.label }}</span> <span class="muted">({{ value.count }})</span>
                     </label>
                   {%- endfor -%}
@@ -39,15 +52,16 @@
       </form>
       <button class="btn btn--block filters__apply" type="submit" form="FilterForm">Show results</button>
     </aside>
+    {%- else -%}<form id="FilterForm" data-filter-form method="get"></form>{%- endif -%}
 
     <div class="plp__main">
       <div class="toolbar">
-        <button class="btn btn--ghost filters__open" type="button" data-filter-open>Filters</button>
+        {%- if collection.filters.size > 0 -%}<button class="btn btn--ghost filters__open" type="button" data-filter-open aria-controls="CollectionFilters-{{ section.id }}" aria-expanded="false">Filters</button>{%- endif -%}
         <span class="muted">{{ collection.products_count }} products</span>
         <div class="toolbar__right">
           <label class="sr" for="SortBy">Sort by</label>
           <select id="SortBy" name="sort_by" form="FilterForm">
-            {%- for option in collection.sort_options -%}<option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>{%- endfor -%}
+            {%- for option in collection.sort_options -%}<option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{% case option.value %}{% when 'manual' %}Featured{% when 'created-descending' %}Newest{% when 'price-ascending' %}Price: Low to high{% when 'price-descending' %}Price: High to low{% else %}{{ option.name }}{% endcase %}</option>{%- endfor -%}
           </select>
           <div class="cols" role="group" aria-label="Grid size">
             <button type="button" data-cols="2" aria-label="2 columns">2</button><button type="button" data-cols="3" aria-label="3 columns">3</button><button type="button" data-cols="4" aria-label="4 columns">4</button>
@@ -56,7 +70,11 @@
       </div>
       {%- assign has_active = false -%}
       {%- capture chips -%}
-        {%- for filter in collection.filters -%}{%- if filter.type != 'price_range' -%}{%- for value in filter.active_values -%}{%- assign has_active = true -%}<a class="chipx" href="{{ value.url_to_remove }}">{{ value.label }} ✕</a>{%- endfor -%}{%- endif -%}{%- endfor -%}
+        {%- for filter in collection.filters -%}
+          {%- if filter.type == 'price_range' -%}
+            {%- if filter.min_value.value or filter.max_value.value -%}{%- assign has_active = true -%}<a class="chipx" href="{{ filter.url_to_remove }}">Price: {% if filter.min_value.value %}{{ filter.min_value.value | money }}{% else %}₹0{% endif %} – {% if filter.max_value.value %}{{ filter.max_value.value | money }}{% else %}Any{% endif %} ✕</a>{%- endif -%}
+          {%- else -%}{%- for value in filter.active_values -%}{%- assign has_active = true -%}<a class="chipx" href="{{ value.url_to_remove }}">{{ value.label | escape }} ✕</a>{%- endfor -%}{%- endif -%}
+        {%- endfor -%}
       {%- endcapture -%}
       {%- if has_active -%}<div class="chipx-row">{{ chips }}</div>{%- endif -%}
       {%- if collection.products.size == 0 -%}
@@ -70,5 +88,10 @@
 </section>
 {%- endpaginate -%}
 {% schema %}
-{"name":"Collection page","settings":[{"type":"range","id":"per_page","label":"Products per page","min":8,"max":36,"step":4,"default":24}]}
+{"name":"Collection page","settings":[
+ {"type":"image_picker","id":"banner_image","label":"Collection banner image","info":"Overrides this collection's featured image."},
+ {"type":"text","id":"heading","label":"Heading override","info":"Leave blank to use the collection title."},
+ {"type":"richtext","id":"description","label":"Description override","info":"Leave blank to use the collection description."},
+ {"type":"range","id":"per_page","label":"Products per page","min":8,"max":36,"step":4,"default":24}
+]}
 {% endschema %}

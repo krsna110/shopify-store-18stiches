@@ -1,34 +1,48 @@
 <section class="wrap block cartpage">
   <div class="page-head"><h1>Your bag</h1></div>
+  <p class="cart-message" data-cart-page-message role="status" aria-live="polite" hidden></p>
   {%- if cart.item_count == 0 -%}
-    <p class="empty">Your bag is empty. <a class="link" href="{{ routes.all_products_collection_url }}">Continue shopping</a></p>
+    <div class="cartpage__empty"><p class="drawer__empty-eyebrow">18STICHES</p><h2>Your bag is waiting.</h2><p>Discover a piece for your everyday moments.</p><a class="btn" href="{{ routes.all_products_collection_url }}">Continue shopping</a></div>
   {%- else -%}
-    <form action="{{ routes.cart_url }}" method="post" class="cartform">
-      {% render 'shipping-progress' %}
-      <ul class="drawer__items">
-        {%- for item in cart.items -%}
-          <li class="line">
-            <a class="line__img" href="{{ item.url }}">{% if item.image %}{{ item.image | image_url: width: 240 | image_tag: loading: 'lazy', width: 100 }}{% endif %}</a>
-            <div class="line__info">
-              <a href="{{ item.url }}" class="line__title">{{ item.product.title }}</a>
-              {%- unless item.product.has_only_default_variant -%}<p class="muted">{{ item.variant.title }}</p>{%- endunless -%}
-              <p class="muted">{{ item.final_price | money }}</p>
-              <label class="sr" for="q{{ item.index }}">Quantity</label>
-              <input id="q{{ item.index }}" class="buy__qty" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
-            </div>
-            <div class="line__price">{{ item.final_line_price | money }}<a class="link" href="{{ item.url_to_remove }}">Remove</a></div>
-          </li>
-        {%- endfor -%}
-      </ul>
-      <div class="cartfoot">
-        <label for="CartNote">Order note</label>
-        <textarea id="CartNote" name="note" rows="3">{{ cart.note }}</textarea>
-        <p class="row"><span>Subtotal</span><strong>{{ cart.total_price | money }}</strong></p>
-        <p class="muted">Taxes and shipping are calculated at checkout.</p>
-        <button class="btn btn--ghost btn--block" type="submit" name="update">Update bag</button>
-        <button class="btn btn--block" type="submit" name="checkout">Checkout</button>
-      </div>
-    </form>
+    <div class="cartpage__layout">
+      <form action="{{ routes.cart_url }}" method="post" class="cartform" data-cart-page-form>
+        {% render 'shipping-progress' %}
+        <ul class="drawer__items">
+          {%- for item in cart.items -%}
+            <li class="line">
+              <a class="line__img" href="{{ item.url }}" aria-label="View {{ item.product.title | escape }}">{% if item.image %}{{ item.image | image_url: width: 320 | image_tag: loading: 'lazy', widths: '120, 200, 320', sizes: '100px', alt: item.product.title }}{% endif %}</a>
+              <div class="line__info">
+                <a href="{{ item.url }}" class="line__title">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}<ul class="line__options">{%- for option in item.options_with_values -%}<li><span>{{ option.name }}:</span> {{ option.value }}</li>{%- endfor -%}</ul>{%- endunless -%}
+                <p class="muted">{{ item.final_price | money }} each</p>
+                <div class="qty qty--cartpage">
+                  <button type="button" data-cart-qty-step="-1" data-qty-input="CartQty-{{ section.id }}-{{ forloop.index }}" aria-label="Decrease quantity of {{ item.product.title | escape }}">−</button>
+                  <label class="sr" for="CartQty-{{ section.id }}-{{ forloop.index }}">Quantity</label>
+                  <input id="CartQty-{{ section.id }}-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric">
+                  <button type="button" data-cart-qty-step="1" data-qty-input="CartQty-{{ section.id }}-{{ forloop.index }}" aria-label="Increase quantity of {{ item.product.title | escape }}">+</button>
+                </div>
+              </div>
+              <div class="line__price">{% if item.original_line_price > item.final_line_price %}<s>{{ item.original_line_price | money }}</s>{% endif %}<strong>{{ item.final_line_price | money }}</strong><a class="link" href="{{ item.url_to_remove }}">Remove</a></div>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <div class="cartfoot">
+          <label for="CartNote">Order note</label>
+          <textarea id="CartNote" name="note" rows="3">{{ cart.note }}</textarea>
+          <button class="btn btn--ghost btn--block" type="submit" name="update">Update bag</button>
+          {%- if cart.cart_level_discount_applications.size > 0 -%}<ul class="cart-discounts">{%- for discount in cart.cart_level_discount_applications -%}<li>{{ discount.title | escape }} <span>−{{ discount.total_allocated_amount | money }}</span></li>{%- endfor -%}</ul>{%- endif -%}
+          <p class="row"><span>Subtotal</span><strong>{{ cart.total_price | money }}</strong></p>
+          <p class="muted">Taxes, discounts and shipping are confirmed at checkout.</p>
+          <button class="btn btn--block" type="submit" name="checkout">Checkout</button>
+          <a class="link" href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+        </div>
+      </form>
+      <form class="discount-form cartpage__discount" data-discount-form>
+        <label for="CartDiscount">Discount code</label>
+        <div><input id="CartDiscount" name="discount_code" type="text" autocomplete="off" placeholder="Enter code" required><button class="btn btn--ghost" type="submit">Apply</button></div>
+        <p data-discount-message role="status" aria-live="polite"></p>
+      </form>
+    </div>
   {%- endif -%}
 </section>
 {% schema %}

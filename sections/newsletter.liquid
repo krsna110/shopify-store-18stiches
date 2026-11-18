@@ -1,0 +1,24 @@
+<section class="newsletter block" {{ section.shopify_attributes }}>
+  <div class="newsletter__inner wrap">
+    {%- if section.settings.eyebrow != blank -%}<p class="newsletter__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    <h2>{{ section.settings.heading }}</h2>
+    {%- if section.settings.text != blank -%}<p class="newsletter__copy">{{ section.settings.text }}</p>{%- endif -%}
+    {%- form 'customer', class: 'newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label class="sr" for="NewsletterEmail-{{ section.id }}">Email address</label>
+      <input id="NewsletterEmail-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email }}" placeholder="Your email address" autocomplete="email" autocorrect="off" autocapitalize="off" required>
+      <button class="btn" type="submit">{{ section.settings.button_label }}</button>
+      {%- if form.posted_successfully? -%}<p class="newsletter__message" role="status">{{ section.settings.success_message }}</p>{%- endif -%}
+      {%- if form.errors -%}<div class="newsletter__message newsletter__message--error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+{% schema %}
+{"name":"Newsletter signup","settings":[
+ {"type":"text","id":"eyebrow","label":"Eyebrow","default":"THE 18STICHES LETTER"},
+ {"type":"text","id":"heading","label":"Heading","default":"A Note of Elegance."},
+ {"type":"textarea","id":"text","label":"Description","default":"Be the first to discover new arrivals, exclusive edits and special offers."},
+ {"type":"text","id":"button_label","label":"Button label","default":"Sign up"},
+ {"type":"text","id":"success_message","label":"Success message","default":"Thank you for subscribing."}
+],"presets":[{"name":"Newsletter signup"}]}
+{% endschema %}

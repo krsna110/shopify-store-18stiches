@@ -1,0 +1,23 @@
+<section class="wrap block customer-page customer-auth">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="{{ routes.root_url }}">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Sign in</li></ol></nav>
+  <header class="customer-page__head"><p class="about-editorial__eyebrow">18STICHES ACCOUNT</p><h1>Welcome back</h1><p>Sign in to view your orders and saved addresses.</p></header>
+  <div class="customer-auth__grid">
+    <section class="customer-panel"><h2>Sign in</h2>
+      {%- form 'customer_login', class: 'customer-form' -%}
+        {%- if form.errors -%}<div class="customer-form__error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div><label for="CustomerEmail">Email</label><input id="CustomerEmail" type="email" name="customer[email]" autocomplete="email" autocapitalize="off" required></div>
+        <div><label for="CustomerPassword">Password</label><input id="CustomerPassword" type="password" name="customer[password]" autocomplete="current-password" required></div>
+        <button class="btn" type="submit">Sign in</button>
+      {%- endform -%}
+    </section>
+    <section class="customer-panel" id="recover"><h2>Reset your password</h2><p class="muted">Enter the email associated with your account to request a reset.</p>
+      {%- form 'recover_customer_password', class: 'customer-form' -%}
+        {%- if form.posted_successfully? -%}<p class="customer-form__success" role="status">If an account matches this email, Shopify will send password recovery instructions.</p>{%- endif -%}
+        {%- if form.errors -%}<div class="customer-form__error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <div><label for="RecoverEmail">Email</label><input id="RecoverEmail" type="email" name="email" autocomplete="email" autocapitalize="off" required></div>
+        <button class="btn btn--ghost" type="submit">Send recovery email</button>
+      {%- endform -%}
+    </section>
+  </div>
+  <p class="customer-auth__register">New to 18STICHES? <a href="{{ routes.account_register_url }}">Create an account</a>.</p>
+</section>

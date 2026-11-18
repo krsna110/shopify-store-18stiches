@@ -1,0 +1,12 @@
+<section class="wrap block customer-page customer-auth">
+  <header class="customer-page__head"><p class="about-editorial__eyebrow">18STICHES ACCOUNT</p><h1>Activate your account</h1><p>Set a password to finish activating your Shopify customer account.</p></header>
+  <section class="customer-panel customer-panel--narrow">
+    {%- form 'activate_customer_password', class: 'customer-form' -%}
+      {%- if form.errors -%}<div class="customer-form__error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <div><label for="ActivatePassword">Password</label><input id="ActivatePassword" type="password" name="customer[password]" autocomplete="new-password" required></div>
+      <div><label for="ActivatePasswordConfirm">Confirm password</label><input id="ActivatePasswordConfirm" type="password" name="customer[password_confirmation]" autocomplete="new-password" required></div>
+      <button class="btn" type="submit">Activate account</button>
+      <button class="btn btn--ghost" type="submit" name="decline">Decline invitation</button>
+    {%- endform -%}
+  </section>
+</section>

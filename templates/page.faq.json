@@ -3,19 +3,29 @@
     "faq": {
       "type": "faq-accordion",
       "settings": {
-        "eyebrow": "HELP & CLIENT CARE",
+        "eyebrow": "18STICHES CUSTOMER CARE",
         "heading": "Frequently Asked Questions",
-        "subheading": "Details regarding our shipping timelines across India, international orders, custom alterations, and returns."
-      }
-    },
-    "trust": {
-      "type": "trust",
-      "settings": {}
+        "subheading": "Answers to common questions about products and shopping with 18STICHES.",
+        "footer_text": "Need more help? Get in touch with 18STICHES.",
+        "contact_label": "CONTACT US"
+      },
+      "blocks": {
+        "orders_heading": {"type":"category_heading","settings":{"title":"Orders"}},
+        "orders_question": {"type":"faq_item","settings":{"question":"Where can I find information about my order?","answer":"<p>For help with an order, contact us and include your order number.</p>"}},
+        "payments_heading": {"type":"category_heading","settings":{"title":"Payments"}},
+        "payments_question": {"type":"faq_item","settings":{"question":"Which payment methods are available?","answer":"<p>The payment methods available for your order are shown during checkout.</p>"}},
+        "size_heading": {"type":"category_heading","settings":{"title":"Sizes and product information"}},
+        "size_question": {"type":"faq_item","settings":{"question":"How do I choose a size?","answer":"<p>Check the size information on the product page. If you need help selecting an option, contact us before ordering.</p>"}},
+        "details_question": {"type":"faq_item","settings":{"question":"Where can I find product fabric and care details?","answer":"<p>Refer to the details listed on the product page. If a detail is not shown, contact us to ask about that item.</p>"}},
+        "shipping_heading": {"type":"category_heading","settings":{"title":"Shipping"}},
+        "shipping_question": {"type":"faq_item","settings":{"question":"Where can I find shipping costs and delivery information?","answer":"<p>Review the shipping information shown during checkout and the Shipping Policy page for the current details.</p>"}},
+        "returns_heading": {"type":"category_heading","settings":{"title":"Returns and refunds"}},
+        "returns_question": {"type":"faq_item","settings":{"question":"How can I request a return or refund?","answer":"<p>Please read the Return and Refund Policy page for current eligibility and instructions. Contact us if you have a question about your order.</p>"}},
+        "tracking_heading": {"type":"category_heading","settings":{"title":"Order tracking"}},
+        "tracking_question": {"type":"faq_item","settings":{"question":"How can I get help tracking an order?","answer":"<p>Contact us with your order number and we can help you find the available order status information.</p>"}}
+      },
+      "block_order": ["orders_heading","orders_question","payments_heading","payments_question","size_heading","size_question","details_question","shipping_heading","shipping_question","returns_heading","returns_question","tracking_heading","tracking_question"]
     }
   },
-  "order": [
-    "faq",
-    "trust"
-  ]
+  "order": ["faq"]
 }
-

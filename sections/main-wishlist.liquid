@@ -1,0 +1,17 @@
+<section class="wrap block wishlist-page">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="{{ routes.root_url }}">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Wishlist</li></ol></nav>
+  <header class="wishlist-page__head"><p class="about-editorial__eyebrow">18STICHES</p><h1>Your Wishlist</h1>
+    <p>Saved in this browser for this device. No account is required; saved items do not sync across devices or customer accounts.</p>
+  </header>
+  {%- if settings.wishlist_snippet != blank -%}
+    <div class="wishlist-page__app-note"><p>A wishlist integration is configured for this store. Use the wishlist experience provided by that integration.</p><a class="btn btn--ghost" href="{{ settings.wishlist_url | default: routes.account_url }}">Open wishlist</a></div>
+  {%- else -%}
+    <p class="wishlist-page__status" data-wishlist-status role="status" aria-live="polite"></p>
+    <div class="grid wishlist-page__grid" data-wishlist-grid></div>
+    <div class="wishlist-page__empty" data-wishlist-empty hidden><h2>No saved pieces yet.</h2><p>Tap the heart on a product to keep it here.</p><a class="btn" href="{{ routes.all_products_collection_url }}">Explore the collection</a></div>
+  {%- endif -%}
+  <p class="wishlist-page__account-link">Want to review an order or manage saved addresses? <a href="{{ routes.account_url }}">Visit your Shopify account</a>.</p>
+</section>
+{% schema %}
+{"name":"Wishlist page","settings":[]}
+{% endschema %}

@@ -4,7 +4,7 @@
       {%- if product.featured_image -%}
         {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 500, 700', sizes: '(min-width: 900px) 25vw, 50vw', class: 'card__img' }}
         {%- if product.images[1] -%}{{ product.images[1] | image_url: width: 700 | image_tag: loading: 'lazy', widths: '350, 500, 700', sizes: '(min-width: 900px) 25vw, 50vw', class: 'card__img card__img--alt', alt: '' }}{%- endif -%}
-      {%- else -%}{{ 'product-1' | placeholder_svg_tag: 'card__img placeholder' }}{%- endif -%}
+      {%- endif -%}
       {%- if product.available == false -%}<span class="badge badge--soldout">Sold out</span>
       {%- elsif product.compare_at_price > product.price -%}<span class="badge">{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}% off</span>{%- endif -%}
       {% render 'rating', product: product %}
@@ -14,5 +14,22 @@
   <div class="card__body">
     <a class="card__title" href="{{ product.url }}">{{ product.title }}</a>
     {% render 'price', product: product %}
+    {%- if show_quick_add -%}
+      {%- assign quick_variant = product.selected_or_first_available_variant -%}
+      {%- if quick_variant != blank -%}
+        {%- form 'product', product, class: 'card__quick-form', data-product-form: '' -%}
+          {%- if product.has_only_default_variant or product.variants.size == 1 -%}
+            <input type="hidden" name="id" value="{{ quick_variant.id }}">
+          {%- else -%}
+            <label class="sr" for="QuickVariant-{{ section.id }}-{{ product.id }}">Choose an option for {{ product.title | escape }}</label>
+            <select id="QuickVariant-{{ section.id }}-{{ product.id }}" name="id">
+              {%- for variant in product.variants -%}<option value="{{ variant.id }}" {% if variant.id == quick_variant.id %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>{{ variant.title }}{% unless variant.available %} — Sold out{% endunless %}</option>{%- endfor -%}
+            </select>
+          {%- endif -%}
+          <button class="btn btn--ghost btn--block" type="submit" name="add" {% unless quick_variant.available %}disabled{% endunless %}>{% if product.has_only_default_variant or product.variants.size == 1 %}Quick add{% else %}Choose & add{% endif %}</button>
+          <span class="sr" data-form-msg role="status"></span>
+        {%- endform -%}
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </article>

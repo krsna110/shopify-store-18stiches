@@ -1,16 +1,17 @@
 <section class="slider" data-slider>
   <div class="slider__track" data-slider-track>
     {%- for block in section.blocks -%}
-      <div class="slide" {{ block.shopify_attributes }}>
-        <a class="slide__link" href="{{ block.settings.link | default: routes.all_products_collection_url }}" tabindex="-1" aria-hidden="true">
-          <picture>
-            {%- if block.settings.image_mobile -%}<source media="(max-width: 700px)" srcset="{{ block.settings.image_mobile | image_url: width: 900 }}">{%- endif -%}
-            {%- if block.settings.image -%}{%- assign lazy = 'lazy' -%}{%- if forloop.first -%}{%- assign lazy = 'eager' -%}{%- endif -%}{{ block.settings.image | image_url: width: 2000 | image_tag: loading: lazy, widths: '900, 1400, 2000', sizes: '100vw' }}{%- else -%}{{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}{%- endif -%}
+      <div class="slide{% if block.settings.image == blank %} slide--text-only{% endif %}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          <picture class="slide__picture">
+            {%- if block.settings.image_mobile != blank -%}<source media="(max-width: 700px)" srcset="{{ block.settings.image_mobile | image_url: width: 900 }}">{%- endif -%}
+            {%- assign loading = 'lazy' -%}{%- assign priority = 'auto' -%}{%- if forloop.first -%}{%- assign loading = 'eager' -%}{%- assign priority = 'high' -%}{%- endif -%}
+            {{ block.settings.image | image_url: width: 2400 | image_tag: loading: loading, fetchpriority: priority, widths: '900, 1400, 1800, 2400', sizes: '100vw', alt: block.settings.image.alt | default: block.settings.heading }}
           </picture>
-        </a>
+        {%- endif -%}
         {%- if block.settings.heading != blank -%}
           <div class="slide__text">
-            <h2>{{ block.settings.heading }}</h2>
+            {%- if forloop.first -%}<h1>{{ block.settings.heading }}</h1>{%- else -%}<h2>{{ block.settings.heading }}</h2>{%- endif -%}
             {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
             {%- if block.settings.button_label != blank -%}<a class="btn" href="{{ block.settings.link | default: routes.all_products_collection_url }}">{{ block.settings.button_label }}</a>{%- endif -%}
           </div>
@@ -28,9 +29,9 @@
  "blocks":[{"type":"slide","name":"Slide","settings":[
   {"type":"image_picker","id":"image","label":"Desktop image (wide)"},
   {"type":"image_picker","id":"image_mobile","label":"Mobile image (portrait)"},
-  {"type":"text","id":"heading","label":"Heading","info":"Leave empty if your image already has text."},
+ {"type":"text","id":"heading","label":"Heading","info":"Use editable text here rather than baking copy into the image."},
   {"type":"text","id":"text","label":"Text"},
-  {"type":"text","id":"button_label","label":"Button label","default":"Shop now"},
+  {"type":"text","id":"button_label","label":"Button label","default":"Explore collection"},
   {"type":"url","id":"link","label":"Link"}]}],
  "presets":[{"name":"Banner slider","blocks":[{"type":"slide"}]}]}
 {% endschema %}

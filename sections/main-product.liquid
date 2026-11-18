@@ -2,19 +2,39 @@
 <section class="wrap product" data-product-section>
   <div class="product__gallery">
     {%- for media in product.media -%}
-      {%- if media.media_type == 'image' -%}
-        {%- assign load = 'lazy' -%}{%- if forloop.first -%}{%- assign load = 'eager' -%}{%- endif -%}
-        <div class="product__slide">{{ media | image_url: width: 1100 | image_tag: loading: load, widths: '500, 800, 1100', sizes: '(min-width: 900px) 30vw, 85vw' }}</div>
-      {%- endif -%}
-    {%- else -%}
-      <div class="product__slide">{{ 'product-1' | placeholder_svg_tag: 'placeholder' }}</div>
+      {%- assign load = 'lazy' -%}{%- if forloop.first -%}{%- assign load = 'eager' -%}{%- endif -%}
+      <div class="product__slide" data-media-id="{{ media.id }}">
+        {%- case media.media_type -%}
+          {%- when 'image' -%}
+            {{ media | image_url: width: 1400 | image_tag: loading: load, widths: '500, 800, 1100, 1400', sizes: '(min-width: 900px) 60vw, 86vw', alt: media.alt | default: product.title }}
+            <button class="product__zoom-trigger" type="button" data-zoom-src="{{ media | image_url: width: 2000 }}" data-zoom-alt="{{ media.alt | default: product.title | escape }}" aria-label="Enlarge {{ media.alt | default: product.title | escape }}">+</button>
+          {%- when 'video' -%}{{ media | media_tag: image_size: '1100x', controls: true }}
+          {%- when 'external_video' -%}{{ media | external_video_tag: loading: 'lazy', class: 'product__external-video' }}
+          {%- when 'model' -%}{{ media | model_viewer_tag: image_size: '1100x', reveal: 'interaction', toggleable: true }}
+        {%- endcase -%}
+      </div>
     {%- endfor -%}
+    {%- if product.media.size > 1 -%}
+      <div class="product__thumbnails" aria-label="Product media">
+        {%- for media in product.media -%}
+          <button class="product__thumbnail" type="button" data-gallery-thumb="{{ media.id }}" aria-label="Show media {{ forloop.index }} of {{ product.media.size }}" {% if forloop.first %}aria-current="true"{% endif %}>
+            {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '80px', alt: media.alt | default: product.title }}
+            {%- unless media.media_type == 'image' -%}<span aria-hidden="true">{% if media.media_type == 'model' %}3D{% else %}▶{% endif %}</span>{%- endunless -%}
+          </button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
+  <dialog class="product-zoom" data-product-zoom aria-label="Product image enlarged">
+    <button class="product-zoom__close" type="button" data-zoom-close aria-label="Close enlarged image">&times;</button>
+    <img data-zoom-image alt="" width="1400" height="1750">
+  </dialog>
   <div class="product__info">
+    {%- if product.vendor != blank -%}<p class="product__vendor">{{ product.vendor | escape }}</p>{%- endif -%}
     <div class="product__title-row"><h1>{{ product.title }}</h1>{% render 'wishlist-button', product: product %}</div>
     {% render 'rating', product: product %}
     {% render 'price', product: product %}
-    <p class="muted">Inclusive of all taxes.</p>
+    <p class="muted">Inclusive of all taxes<span class="product__sku" data-variant-sku-wrap {% if current.sku == blank %}hidden{% endif %}> · SKU: <span data-variant-sku>{{ current.sku | escape }}</span></span>.</p>
 
     {%- form 'product', product, id: 'ProductForm', class: 'buy', data-product-form: '' -%}
       <input type="hidden" name="id" value="{{ current.id }}" data-variant-id>
@@ -26,7 +46,9 @@
             <div class="opt__legend-row">
               <legend>{{ option.name }}</legend>
               {%- if opt_down contains 'size' -%}
-                <a class="opt__guide-link link" href="/pages/size-guide">Size Guide &rarr;</a>
+                {%- if section.settings.size_guide_page != blank -%}
+                  <button class="opt__guide-link link" type="button" data-size-guide-open="SizeGuide-{{ section.id }}">Size Guide &rarr;</button>
+                {%- endif -%}
               {%- endif -%}
             </div>
             <div class="opt__vals">
@@ -39,8 +61,8 @@
         {%- endfor -%}
       {%- endunless -%}
       <div class="buy__row">
-        <label class="sr" for="Qty">Quantity</label>
-        <input id="Qty" class="buy__qty" type="number" name="quantity" value="1" min="1">
+        <label class="sr" for="Qty-{{ section.id }}">Quantity</label>
+        <input id="Qty-{{ section.id }}" class="buy__qty" type="number" name="quantity" value="1" min="1" inputmode="numeric">
         <button class="btn btn--block" type="submit" name="add" {% unless current.available %}disabled{% endunless %}>{% if current.available %}Add to bag{% else %}Sold out{% endif %}</button>
       </div>
       <p class="note note--err" data-form-msg role="alert"></p>
@@ -56,19 +78,34 @@
     {%- for block in section.blocks -%}{%- if block.type == '@app' -%}{% render block %}{%- endif -%}{%- endfor -%}
     <div class="acc">
       {%- if product.description != blank -%}<details open><summary>Details</summary><div class="rte">{{ product.description }}</div></details>{%- endif -%}
+      {%- assign fabric = product.metafields.custom.fabric -%}
+      {%- if fabric != blank -%}<details><summary>Fabric</summary><div class="rte">{{ fabric | metafield_tag }}</div></details>{%- endif -%}
+      {%- assign care = product.metafields.custom.care_instructions -%}
+      {%- if care != blank -%}<details><summary>Care</summary><div class="rte">{{ care | metafield_tag }}</div></details>{%- endif -%}
+      {%- assign delivery_returns = product.metafields.custom.shipping_returns -%}
+      {%- if delivery_returns != blank -%}<details><summary>Shipping &amp; returns</summary><div class="rte">{{ delivery_returns | metafield_tag }}</div></details>
+      {%- elsif section.settings.shipping_returns_content != blank -%}<details><summary>Shipping &amp; returns</summary><div class="rte">{{ section.settings.shipping_returns_content }}</div></details>{%- endif -%}
       {%- for block in section.blocks -%}
         {%- if block.type == '@app' -%}{%- continue -%}{%- endif -%}
         <details {{ block.shopify_attributes }}><summary>{{ block.settings.title }}</summary><div class="rte">{{ block.settings.content }}</div></details>
       {%- endfor -%}
     </div>
   </div>
+  {%- if section.settings.size_guide_page != blank -%}
+    <dialog class="size-guide-dialog" id="SizeGuide-{{ section.id }}" aria-labelledby="SizeGuideTitle-{{ section.id }}" data-size-guide-dialog>
+      <div class="size-guide-dialog__header"><h2 id="SizeGuideTitle-{{ section.id }}">{{ section.settings.size_guide_page.title | escape }}</h2><button type="button" data-size-guide-close aria-label="Close size guide">&times;</button></div>
+      <div class="rte">{{ section.settings.size_guide_page.content }}</div>
+    </dialog>
+  {%- endif -%}
   <script type="application/json" data-product-json>{{ product | json }}</script>
 </section>
 {{ product | structured_data }}
 {% schema %}
 {"name":"Product","settings":[
  {"type":"textarea","id":"perks","label":"Highlights under the button (one per line)","default":""},
- {"type":"checkbox","id":"show_payment_button","label":"Show Buy it now button","default":false},
+ {"type":"page","id":"size_guide_page","label":"Size guide page","info":"Choose a page with confirmed size guidance. No measurements are added by the theme."},
+ {"type":"richtext","id":"shipping_returns_content","label":"Shipping and returns details","info":"Optional fallback when product metafield custom.shipping_returns is empty."},
+ {"type":"checkbox","id":"show_payment_button","label":"Show Buy it now button","default":true},
  {"type":"checkbox","id":"show_whatsapp","label":"Show WhatsApp button","info":"Needs a WhatsApp number in Theme settings > Store.","default":false}
 ],
 "blocks":[{"type":"@app"},{"type":"accordion","name":"Info section","settings":[{"type":"text","id":"title","label":"Title","default":"Info"},{"type":"richtext","id":"content","label":"Content"}]}]}

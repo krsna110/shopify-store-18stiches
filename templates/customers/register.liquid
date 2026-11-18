@@ -1,0 +1,13 @@
+<section class="wrap block customer-page customer-auth">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="{{ routes.root_url }}">Home</a></li><li aria-hidden="true">/</li><li><a href="{{ routes.account_login_url }}">Sign in</a></li><li aria-hidden="true">/</li><li aria-current="page">Create account</li></ol></nav>
+  <header class="customer-page__head"><p class="about-editorial__eyebrow">18STICHES ACCOUNT</p><h1>Create your account</h1><p>Use your account to review orders and manage saved addresses.</p></header>
+  <section class="customer-panel customer-panel--narrow"><h2>Your details</h2>
+    {%- form 'create_customer', class: 'customer-form' -%}
+      {%- if form.errors -%}<div class="customer-form__error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <div class="customer-form__row"><div><label for="RegisterFirstName">First name</label><input id="RegisterFirstName" type="text" name="customer[first_name]" autocomplete="given-name"></div><div><label for="RegisterLastName">Last name</label><input id="RegisterLastName" type="text" name="customer[last_name]" autocomplete="family-name"></div></div>
+      <div><label for="RegisterEmail">Email</label><input id="RegisterEmail" type="email" name="customer[email]" autocomplete="email" autocapitalize="off" required></div>
+      <div><label for="RegisterPassword">Password</label><input id="RegisterPassword" type="password" name="customer[password]" autocomplete="new-password" required></div>
+      <button class="btn" type="submit">Create account</button>
+    {%- endform -%}
+  </section>
+</section>

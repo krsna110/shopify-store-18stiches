@@ -1,18 +1,31 @@
+{%- assign has_categories = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.settings.collection != blank or block.settings.link != blank -%}{%- assign has_categories = true -%}{%- endif -%}
+{%- endfor -%}
+{%- if has_categories -%}
 <section class="wrap block">
   <div class="block__head"><h2>{{ section.settings.heading }}</h2></div>
   <div class="mosaic">
     {%- for block in section.blocks -%}
-      {%- assign n = forloop.index | modulo: 6 | plus: 1 -%}
-      <a class="mosaic__item mosaic__item--{{ forloop.index }}" href="{{ block.settings.link | default: routes.all_products_collection_url }}" {{ block.shopify_attributes }}>
-        {%- if block.settings.image -%}{{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 900px) 33vw, 100vw' }}{%- else -%}{{ 'lifestyle-' | append: forloop.index | placeholder_svg_tag: 'placeholder' }}{%- endif -%}
-        <span class="mosaic__label">{{ block.settings.title }}</span>
-      </a>
+      {%- assign category = block.settings.collection -%}
+      {%- assign category_image = block.settings.image | default: category.image -%}
+      {%- assign category_title = category.title | default: block.settings.title -%}
+      {%- assign category_link = category.url | default: block.settings.link -%}
+      {%- if category_title != blank and category_link != blank -%}
+        <a class="mosaic__item mosaic__item--{{ forloop.index }}" href="{{ category_link }}" {{ block.shopify_attributes }}>
+          {%- if category_image != blank -%}{{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '450, 700, 900, 1200', sizes: '(min-width: 900px) 50vw, 100vw', alt: category_image.alt | default: category_title }}{%- endif -%}
+          <span class="mosaic__label">{{ category_title }}</span>
+        </a>
+      {%- endif -%}
     {%- endfor -%}
   </div>
 </section>
+{%- elsif request.design_mode -%}
+  <div class="wrap block"><p class="muted">Select a collection for each category card in the theme editor.</p></div>
+{%- endif -%}
 {% schema %}
 {"name":"Collection mosaic","max_blocks":4,
  "settings":[{"type":"text","id":"heading","label":"Heading","default":"The style edit"}],
- "blocks":[{"type":"tile","name":"Tile","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"title","label":"Title","default":"Collection"},{"type":"url","id":"link","label":"Link"}]}],
+ "blocks":[{"type":"tile","name":"Collection","settings":[{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Image override (optional)"},{"type":"text","id":"title","label":"Title fallback","default":"Collection"},{"type":"url","id":"link","label":"Link fallback"}]}],
  "presets":[{"name":"Collection mosaic","blocks":[{"type":"tile"},{"type":"tile"},{"type":"tile"},{"type":"tile"}]}]}
 {% endschema %}

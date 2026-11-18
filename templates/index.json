@@ -6,25 +6,15 @@
         "main": {
           "type": "slide",
           "settings": {
-            "heading": "Elegance, Woven Into Every Thread.",
-            "text": "Discover timeless Indian silhouettes and contemporary styles made for your everyday moments. Explore thoughtfully selected kurtis and co-ord sets that bring comfort and elegance together.",
+            "heading": "Style That Feels Like You.",
+            "text": "Discover thoughtfully selected kurtis and co-ord sets for every moment.",
             "button_label": "EXPLORE COLLECTION",
-            "link": "/collections/all"
-          }
-        },
-        "arrivals": {
-          "type": "slide",
-          "settings": {
-            "heading": "Threads of Everyday Elegance.",
-            "text": "Explore the latest styles from 18STICHES.",
-            "button_label": "SHOP NEW ARRIVALS",
             "link": "/collections/all"
           }
         }
       },
       "block_order": [
-        "main",
-        "arrivals"
+        "main"
       ],
       "settings": {}
     },
@@ -34,15 +24,13 @@
         "kurtis": {
           "type": "tile",
           "settings": {
-            "title": "Kurtis",
-            "link": "/collections/all"
+            "title": "Kurtis"
           }
         },
         "coords": {
           "type": "tile",
           "settings": {
-            "title": "Co-ord Sets",
-            "link": "/collections/all"
+            "title": "Co-ord Sets"
           }
         }
       },
@@ -59,15 +47,17 @@
       "settings": {
         "heading": "Bestsellers",
         "layout": "grid",
-        "count": 4
+        "count": 4,
+        "show_quick_add": true
       }
     },
     "new_arrivals": {
       "type": "featured-collection",
       "settings": {
-        "heading": "New arrivals",
+        "heading": "New Arrivals",
         "layout": "grid",
-        "count": 4
+        "count": 4,
+        "show_quick_add": true
       }
     },
     "story": {
@@ -77,8 +67,28 @@
         "heading": "Everyday Style, Thoughtfully Woven.",
         "quote": "Threads of Everyday Elegance.",
         "text": "<p>Discover timeless Indian silhouettes and contemporary styles made for your everyday moments.</p>",
-        "button_label": "About 18STICHES",
+        "button_label": "ABOUT 18STICHES",
         "button_link": "/pages/about"
+      }
+    },
+    "editorial": {
+      "type": "editorial-banner",
+      "settings": {
+        "eyebrow": "18STICHES",
+        "heading": "A softer kind of statement.",
+        "text": "Explore considered silhouettes for your everyday wardrobe.",
+        "button_label": "Explore the collection",
+        "link": "/collections/all"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "THE 18STICHES LETTER",
+        "heading": "A Note of Elegance.",
+        "text": "Be the first to discover new arrivals, exclusive edits and special offers.",
+        "button_label": "Sign up",
+        "success_message": "Thank you for subscribing."
       }
     }
   },
@@ -87,6 +97,8 @@
     "categories",
     "bestsellers",
     "new_arrivals",
-    "story"
+    "story",
+    "editorial",
+    "newsletter"
   ]
 }

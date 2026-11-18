@@ -19,10 +19,10 @@
             <p>{{ block.settings.text }}</p>
             {%- form 'customer', class: 'news' -%}
               <input type="hidden" name="contact[tags]" value="newsletter">
-              <label class="sr" for="NewsEmail">Email address</label>
-              <input id="NewsEmail" type="email" name="contact[email]" required placeholder="Email address" autocomplete="email">
+              <label class="sr" for="NewsEmail-{{ section.id }}-{{ block.id }}">Email address</label>
+              <input id="NewsEmail-{{ section.id }}-{{ block.id }}" type="email" name="contact[email]" required placeholder="Email address" autocomplete="email">
               <button class="btn" type="submit">Subscribe</button>
-              {%- if form.posted_successfully? -%}<p class="note">Thanks, you are subscribed.</p>{%- endif -%}
+              {%- if form.posted_successfully? -%}<p class="note" role="status">Thanks, you are subscribed.</p>{%- endif -%}
               {%- if form.errors -%}<div class="note note--err">{{ form.errors | default_errors }}</div>{%- endif -%}
             {%- endform -%}
         {%- endcase -%}
